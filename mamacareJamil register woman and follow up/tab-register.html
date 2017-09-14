@@ -1,0 +1,39 @@
+﻿<ion-view view-title="Add Woman" >
+   <ion-content>
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <form  name="addWomanForm">
+            <div class="list">
+                <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+                    Required Information
+                </div>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">First Name</span>
+                    <input type="text" placeholder="" ng-model="addWomanModel.firstName">
+                </label>
+                 <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Last Name</span>
+                    <input type="text" placeholder="" ng-model="addWomanModel.lastName">
+                </label>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Address</span>
+                    <input type="text" placeholder="" ng-model="addWomanModel.address">
+                </label>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Phone</span>
+                    <input type="tel" placeholder="" ng-model="addWomanModel.phone">
+                </label>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Date Of Birth</span>
+                    <input type="text" placeholder="" ng-model="addWomanModel.dob">
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive" ng-click="addWoman()" >Add Woman</button>
+            </div>
+       </form>      
+   </ion-content>
+</ion-view>
+
