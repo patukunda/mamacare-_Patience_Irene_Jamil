@@ -1,0 +1,47 @@
+﻿<ion-view view-title="Login" hide-back-button="true">
+    
+    <ion-nav-buttons side="left">
+        <div class="bar bar-header   ">
+          <button class="button button-clear" ng-click="goToStart()">
+              <i class="ion ion-ios-close-empty" style="font-size:50px; margin-top: -8px;"></i>
+          </button>
+        </div>
+    </ion-nav-buttons>
+
+   <ion-content>
+       <div class="padding" style="color:#929292;  font-weight:bolder">
+           LOG IN USING YOUR MAMA CARE ACCOUNT
+       </div>
+       <form name="loginForm"  novalidate="" ng-submit="logIn(loginForm)">
+           <div class="errordiv" ng-hide="loginModel.errors == undefined || loginModel.errors == null || loginModel.errors.length == 0 "  >
+               <ul>
+                    <li ng-repeat="error in loginModel.errors" >
+                        <i class="ion ion-record"></i> {{error}}
+                    </li>
+               </ul>             
+           </div>
+           <div class="list">        
+              <label class="item item-input item-stacked-label" style="border-top:none">
+                <span class="input-label">USERNAME</span>
+                <input type="text" placeholder="" ng-model="loginModel.username" >
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">PASSWORD</span>
+                <input type="password" placeholder="" ng-model="loginModel.password">
+              </label>
+            </div>
+           <div class="padding">
+            <button type="submit" class="button button-block button-assertive">Log In</button>
+          </div>
+      </form>
+      <br /><br />
+      <div class="padding" style="text-align:center; color:#C1C1C1;">
+          By logging in you agree to Mamaas's 
+          <a href="#" ng-click="openBrowser('http://yammzit.com/about/terms_of_service.php?s=1')" >Terms of Service, Privacy Policy, Cookie Policy and Content Policies</a>
+      </div>
+      <br /><br /><br /><br />
+   </ion-content>
+
+
+ 
+</ion-view>

@@ -1,0 +1,66 @@
+<ion-view view-title="" style="background-color:#BE2633" hide-back-button="true">
+    <style>
+
+        #logo {
+            margin-top: 40%;
+            width: 100%;
+            height: 200px;
+            text-align: center;
+            /*background-color: blue;*/
+        }
+
+        #logo img {
+            width: 200px;
+            height: 200px;
+        }
+
+        #pageSlider {
+            margin-top: 20px;
+            height: 30%;
+            width: 100%;
+        }
+
+        #pageSlider .slider-slide {
+            padding: 20px;
+            color: #F97F8A;
+            background-color: none;
+            text-align: center;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+        }
+
+        .slider-pager-page {
+            color: white !important;
+        }
+
+        
+
+        
+        .button.ng-hide {
+            display: none;
+        }
+    </style>
+
+    <div class="bar bar-footer" style="background-color:#BE2633 !important; border:none; background-image:none;">
+        <a href="#/signup" ng-show="user == null || user.is_authorised == false" class="button button-clear pull-left"  style="margin-left:35px; color: white; font-weight: bolder;">Sign up</a>
+        <a href="#/login"  ng-show="user == null || user.is_authorised == false" class="button button-clear pull-right" style="margin-right:35px; color: white; font-weight: bolder;">Login</a>
+    </div>
+
+    <div id="logo">
+        <img ng-src="img/logo.png" />
+    </div>
+    <ion-slide-box on-slide-changed="slideChanged(index)" id="pageSlider">
+        <ion-slide>
+            <h4 style="color:#F97F8A;">"<strong style="color:white;">Discover</strong> mobile-based  solution  to  follow-up  a  pregnant  mother"</h4>
+        </ion-slide>
+        <ion-slide>
+            <h4 style="color:#F97F8A;">"<strong style="color:white;">You</strong> can <strong style="color:white;">Save</strong> lives"</h4>
+        </ion-slide>
+        <ion-slide>
+            <h4 style="color:#F97F8A;">"<strong style="color:white;">Show</strong> the world you're <strong style="color:white;">Open for Business</strong>"</h4>
+        </ion-slide>
+        <ion-slide>
+            <h4 style="color:#F97F8A;">"Find <strong style="color:white;">Got</strong> this thing <strong style="color:white;"> It working fine</strong>"</h4>
+        </ion-slide>
+    </ion-slide-box>
+</ion-view>

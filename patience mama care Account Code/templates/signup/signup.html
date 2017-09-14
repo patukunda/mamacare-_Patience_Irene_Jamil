@@ -1,0 +1,119 @@
+﻿<ion-view view-title="Sign up" hide-back-button="true">
+    
+    <ion-nav-buttons side="left">
+        <div class="bar bar-header   ">
+          <button class="button button-clear" ng-click="goToStart()">
+              <i class="ion ion-ios-close-empty" style="font-size:50px; margin-top: -8px;"></i>
+          </button>
+        </div>
+    </ion-nav-buttons>
+
+    
+
+   <ion-content>
+
+       <form name="signupForm"  >  
+           <div class="errordiv" ng-hide="signupModel.errors == undefined || signupModel.errors == null || signupModel.errors.length == 0 "  >
+               <ul>
+                    <li ng-repeat="error in signupModel.errors" >
+                        <i class="ion ion-record"></i> {{error}}
+                    </li>
+               </ul>             
+           </div>
+           <div class="list">
+              <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">NAME</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="name"
+                    ng-model="signupModel.name" 
+                    ng-minlength="1" 
+                    required
+                 >
+              </label>  
+
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">ADDRESS</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="address"
+                    ng-model="signupModel.address" 
+                    ng-minlength="1" 
+                    required
+                 >
+              </label> 
+               
+              <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Facility</span>
+                <br />
+                <select style="width:90%;     
+                            display: block;
+                            padding-top: 2px;
+                            padding-left: 0;
+                            height: 34px;
+                            color: #111;
+                            vertical-align: middle;
+                            font-size: 14px;
+                            line-height: 16px;border:0px"
+                         ng-model="signupModel.facilityId" 
+                     >
+                    <option value="1"  selected="selected" >Mulago Hospital</option>
+                    <option value="2"  >Mengo Hospital</option>
+                    <option value="3"  >Makerere Hospital</option>
+                </select>
+              </label>  
+                 
+            
+
+             
+              <label class="item item-input item-stacked-label" >
+                <span class="input-label">USER NAME</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    ng-model="signupModel.username"
+                    required
+                >
+              </label>
+
+
+             
+              <label 
+                  class="item item-input item-stacked-label"
+                  >
+                <span class="input-label">PASSWORD</span>
+                <input 
+                    type="password" 
+                    placeholder="" 
+                    ng-model="signupModel.password"
+                    ng-minlength="5" 
+                    ng-maxlength="30"
+                    required
+                 >
+              </label>
+            </div>
+            <ion-checkbox class="checkbox-assertive" 
+                style="color:#999999; border:none;font-size:14px;  max-width: 50px; padding: 0px; padding-top: 30px;"                    
+                ng-model="signupModel.accepts_terms" item-content="">
+            &nbsp;
+            </ion-checkbox>
+            <a href="#" 
+                ngx-clickx="openBrowser('http://mamacare.com/about/terms_of_service.php?s=1')"         
+                style="float: left; margin-top: -40px; margin-left: 50px;" >I Accept the Terms and Conditions of Maama Care.</a>
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive" ng-click="signUp(signupForm)">Sign Up</button>
+            </div>
+      </form>
+      <br />
+
+   </ion-content>
+
+    <div class="bar bar-footer" style="background-color:white !important; border:none; background-image:none; text-align:center !important; color:#939393">
+        <div class="title" style="font-weight:lighter">
+            <!--Already a member? <a href="#/login"  class="button button-clear" style="font-weight:bold; margin-top:5px;">LOGIN</a>--> 
+        </div>              
+    </div>
+ 
+</ion-view>
