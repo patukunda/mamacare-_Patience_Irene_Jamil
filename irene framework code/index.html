@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos; *; style-src  &apos;self&apos; &apos;unsafe-inline&apos; *">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="lib/ion-gallery/dist/ion-gallery.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- global errors -->
+    <script type="text/javascript">
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            //alert(msg);
+            //alert(url);
+            //alert(lineNo);
+            //alert(columnNo);
+            //var staff = JSON.stringify(error);
+            //alert(columnNo);
+            //return false;
+        }
+
+        window.startAt = "05:00"; //should be 10:00
+        window.timeleft = window.startAt;
+        window.timerCallback = null;
+        window.theTimerForBooking = null;
+        window.bookingTimer = function () {
+          var timeArray = window.timeleft.split(/[:]+/);
+          var m = timeArray[0];
+          var s = window.checkSecond((timeArray[1] - 1));
+          if(s==59){
+            m=m-1;
+          }
+          if(m<0){
+            //alert('timer completed');
+            if(typeof window.timerCallback == 'function'){
+              //document.getElementById('timer').innerHTML = window.timeleft;
+              window.timerCallback('cancel');
+            }
+            return;
+          }
+
+          window.timeleft = window.checkMinute(m) + ":" + s;
+          //console.log(typeof window.timerCallback);
+          if(typeof window.timerCallback == 'function'){
+            //document.getElementById('timer').innerHTML = window.timeleft;
+            window.timerCallback(window.timeleft);
+          }
+          window.theTimerForBooking = setTimeout(window.bookingTimer, 1000);
+        }
+        window.checkSecond = function(sec) {
+          if (sec < 10 && sec >= 0) {
+            sec = "0" + sec;
+          }; // add zero in front of numbers < 10
+          if (sec < 0) {
+            sec = "59";
+          };
+          return sec;
+        }
+        window.checkMinute = function(min) {
+          min = parseInt(min);
+          if (min < 10 && min >= 0) {
+            min = "0" + min;
+          }; // add zero in front of numbers < 10
+          if (min < 0) {
+            min = "00";
+          };
+          return min;
+        }
+    </script>
+
+
+    <!-- yammz fonts -->
+    <link href="yammzfonts/styles.css" rel="stylesheet">
+    <!-- <link href="yammzfonts/Movie Icons/Movie Icons/styles.css" rel="stylesheet"> -->
+
+    <script src="js/yammzitObject.js"></script>
+
+    <script src="lib/jquery.js"></script>
+
+    <script src="lib/jsesc/jsesc.js"></script>
+
+    <!--Calender-->
+    <link rel="stylesheet" href="calendar/css/clndr.css" type="text/css" />
+    <script src="calendar/js/underscore-min.js"></script>
+    <script src= "calendar/js/moment-2.2.1.js"></script>
+    <script src="calendar/js/clndr.js"></script>
+    <script src="calendar/js/site.js"></script>
+    <!--End Calender-->
+
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+
+    <script src="lib/angular-messages/angular-messages.min.js"></script>
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="js/ng-cordova.min.js"></script>
+    <script src="cordova.js"></script>
+
+    <script src="lib/hello/dist/hello.all.js"></script>
+
+    <script src="js/openfb.js"></script>
+    <script src="js/ngopenfb.js"></script>
+
+    <script src="lib/ion-gallery/dist/ion-gallery.min.js"></script>
+
+    <script src="lib/moment/moment.js"></script>
+    <!--<script src="lib/angular-moment/angular-moment.js"></script>-->
+    <!--<script src="lib/moment-timezone/moment-timezone.js"></script>-->
+    <!--<script src="lib/moment-timezone/builds/moment-timezone-with-data.js"></script>-->
+    <script src="lib/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+
+
+
+    <script src="lib/ionic-ratings/src/ionic-ratings.js"></script>
+
+    <script src="lib/jstimezonedetect/dist/jstz.js"></script>
+
+    <!--cordovaHTTP
+    <script src="js/cordovaHTTP.js"></script>-->
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+
+    <!-============================================Start Directives ==============================->
+    <script src="js/directives/newsfeed.js"></script>
+    <!-============================================End DIrectives ==============================->
+
+    <!-============================================Controllers ==============================->
+    <!--password-->
+    <script src="js/controllers/password/PasswordCtrl.js"></script>
+
+    <!--comfirm email-->
+    <script src="js/controllers/confirmEmail/ConfirmEmailCtrl.js"></script>
+
+    <!--forgot password-->
+    <script src="js/controllers/forgotPassword/forgotpasswordCtrl.js"></script>
+
+    <!--Business Profile-->
+    <script src="js/controllers/businessProfile/BusinessProfileAddReviewCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfilePhotoReviewCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileMoreCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileMoreInfoCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileMoreInfoFollowersCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileMoreMessagesCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileReviewCommentCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileGallaryCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileEditCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileEditSelectCountryCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileEditSelectCityCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileEditSelectCategory.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileEditSelectSubCategory.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileClaimCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileClaimSelectCategoryCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileClaimSelectCategorysubcategoryCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileClaimCodeCtrl.js"></script>
+    <script src="js/controllers/businessProfile/BusinessProfileAddRatingCtrl.js"></script>
+
+    <!-- my Business Profile -->
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileAddReviewCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileMessagesCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileMoreCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileMoreInfoCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileMoreInfoFollowersCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileEditCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileEditSelectCategory.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileEditSelectCityCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileEditSelectCountryCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileEditSelectSubCategory.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfilePhotoReviewCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessProfileGallaryCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessMessagesChatersCtrl.js"></script>
+    <script src="js/controllers/myBusinessProfile/MyBusinessMessagesChatCtrl.js"></script>
+
+    <!-- category -->
+    <script src="js/controllers/category/CategoryCtrl.js"></script>
+    <script src="js/controllers/category/SubCategoryAddBusinessReviewCtrl.js"></script>
+    <script src="js/controllers/category/SubCategoryBusinessCtrl.js"></script>
+    <script src="js/controllers/category/SubCategoryCtrl.js"></script>
+    <script src="js/controllers/category/SubCategoryResultsCtrl.js"></script>
+
+    <!-- checkin -->
+    <script src="js/controllers/checkin/CheckInCtrl.js"></script>
+    <script src="js/controllers/checkin/CheckInFormCtrl.js"></script>
+
+    <!-- login -->
+    <script src="js/controllers/login/LoginCtrl.js"></script>
+
+    <!-- more -->
+    <script src="js/controllers/more/MoreAboutCtrl.js"></script>
+    <script src="js/controllers/more/MoreAddABusinessCategoriesCtrl.js"></script>
+    <script src="js/controllers/more/MoreAddABusinessCategoriesSubCategoriesCtrl.js"></script>
+    <script src="js/controllers/more/MoreAddABusinessCityCtrl.js"></script>
+    <script src="js/controllers/more/MoreAddABusinessCountryCtrl.js"></script>
+    <script src="js/controllers/more/MoreAddAbusinessCtrl.js"></script>
+    <script src="js/controllers/more/MoreBusinessMessagesCtrl.js"></script>
+    <script src="js/controllers/more/MoreBusinessMessageChatCtrl.js"></script>
+    <script src="js/controllers/more/MoreBusinessToClaimCtrl.js"></script>
+    <script src="js/controllers/more/MoreBusinessToClaimPageCtrl.js"></script>
+    <script src="js/controllers/more/MoreCtrl.js"></script>
+    <script src="js/controllers/more/MoreEventsCtrl.js"></script>
+    <script src="js/controllers/more/MoreFavouritesCtrl.js"></script>
+    <script src="js/controllers/more/MoreFindFriendsCityCtrl.js"></script>
+    <script src="js/controllers/more/MoreFindFriendsCountriesCtrl.js"></script>
+    <script src="js/controllers/more/MoreFindFriendsCtrl.js"></script>
+    <script src="js/controllers/more/MoreFriendRequestsCtrl.js"></script>
+    <script src="js/controllers/more/MoreGossipCtrl.js"></script>
+    <script src="js/controllers/more/MoreSupportCtrl.js"></script>
+    <script src="js/controllers/more/MoreMyBusinessMessagesCtrl.js"></script>
+    <script src="js/controllers/more/MoreBusinessMessagesChatersCtrl.js"></script>
+    <script src="js/controllers/more/MoreBusinessMessagesChatCtrl.js"></script>
+    <script src="js/controllers/more/MoreCinemaCtrl.js"></script>
+    <script src="js/controllers/more/MoreSelectMovieCtrl.js"></script>
+    <script src="js/controllers/more/MoreSelectDateCtrl.js"></script>
+    <script src="js/controllers/more/MoreShowTimeCtrl.js"></script>
+    <script src="js/controllers/more/MoreSelectSeatsCtrl.js"></script>
+    <script src="js/controllers/more/MoreViewBookingCtrl.js"></script>
+    <script src="js/controllers/more/MorePaymentMethodCtrl.js"></script>
+    <script src="js/controllers/more/MorePaymentFinishedCtrl.js"></script>
+    <script src="js/controllers/more/MorePurchaseCtrl.js"></script>
+    <script src="js/controllers/more/MorePendingTicketsCtrl.js"></script>
+    <script src="js/controllers/more/MoreMyTicketsCtrl.js"></script>
+    <script src="js/controllers/more/MoreMyMovieReceiptCtrl.js"></script>
+
+
+    <!-- more profile -->
+    <script src="js/controllers/moreProfile/MoreProfileCtrl.js"></script>
+    <script src="js/controllers/moreProfile/MoreProfileMyBussinessBussinessCtrl.js"></script>
+    <script src="js/controllers/moreProfile/MoreProfileMyBussinessCtrl.js"></script>
+    <script src="js/controllers/moreProfile/MoreProfileMyMessagesCtrl.js"></script>
+    <script src="js/controllers/moreProfile/MoreProfileMyMessagesMyMessageCtrl.js"></script>
+
+
+
+    <!-- my profile -->
+    <script src="js/controllers/myProfile/MyProfileBusinessesAddedByMeCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileBusinessesFollowedByUserCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileCityCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileCountryCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileEventsCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileFollowersCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileFriendsCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileInfoEditCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileMessageChats.js"></script>
+    <script src="js/controllers/myProfile/MyProfileMessages.js"></script>
+    <script src="js/controllers/myProfile/MyProfileMyBusinessesCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfilePhotoesCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyProfileSettingsCtrl.js"></script>
+    <script src="js/controllers/myProfile/PeopleAmFollowingCtrl.js"></script>
+    <script src="js/controllers/myProfile/MyNewsfeedsCtrl.js"></script>
+
+    <!-- news feed -->
+    <script src="js/controllers/newsFeed/NewsfeedBusinessProfileCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedsAddABusinessCategoriesCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedsAddABusinessCategorySubCategoriesCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedsAddABusinessCityCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedsAddABusinessCountryCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedsAddABusinessCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedsCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedsSearchCtrl.js"></script>
+    <script src="js/controllers/newsFeed/NewsfeedUserProfileCtrl.js"></script>
+    <script src="js/controllers/newsFeed/SupportCtrl.js"></script>
+
+    <!-- notification -->
+    <script src="js/controllers/notification/NotificationsCtrl.js"></script>
+    <script src="js/controllers/notification/NotificationNewsfeedCtrl.js"></script>
+
+    <!-- signup -->
+    <script src="js/controllers/signup/SignupCtrl.js"></script>
+
+    <!-- start -->
+    <script src="js/controllers/start/StartCtrl.js"></script>
+
+    <!-- tab -->
+    <script src="js/controllers/tab/TabsCtrl.js"></script>
+
+
+    <!-- user profile -->
+    <script src="js/controllers/userProfile/UserProfileCommentCtrl.js"></script>
+    <script src="js/controllers/userProfile/UserProfileCtrl.js"></script>
+    <script src="js/controllers/userProfile/UserProfileInfoCtrl.js"></script>
+    <script src="js/controllers/userProfile/UserProfileInfoFriendsCtrl.js"></script>
+    <script src="js/controllers/userProfile/UserProfileInfoFavouritesCtrl.js"></script>
+    <script src="js/controllers/userProfile/UserProfileMessageCtrl.js"></script>
+    <script src="js/controllers/userProfile/UserProfilePhotoCtrl.js"></script>
+    <script src="js/controllers/userProfile/UserProfileReviewCtrl.js"></script>
+
+
+    <script src="js/controllers.js"></script>
+    <!-============================================End Controllers ==============================->
+
+
+
+    <!-============================================Start Services ==============================->
+    <script src="js/services/Request.js"></script>
+    <script src="js/services/Account.js"></script>
+    <script src="js/services/Business.js"></script>
+    <script src="js/services/Categories.js"></script>
+    <script src="js/services/Chats.js"></script>
+    <script src="js/services/Countries.js"></script>
+    <script src="js/services/More.js"></script>
+    <script src="js/services/MyBusinesses.js"></script>
+    <script src="js/services/Newsfeeds.js"></script>
+    <script src="js/services/Search.js"></script>
+    <script src="js/services/Slides.js"></script>
+    <script src="js/services/Utility.js"></script>
+
+    <script src="js/services.js"></script>
+    <!-============================================End Services ==============================->
+
+
+
+
+</head>
+<body ng-app="starter" style="background-color: black; font-family: helvertica !important;">
+
+    <style>
+
+        .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
+            padding-left: 64px;
+        }
+
+        .bar .title.title-left {
+            text-align: center;
+        }
+
+
+
+           .title {
+               font-size:16px !important;
+           }
+
+           .btn-block + .btn-block {
+               margin-top: 5px;
+           }
+
+           .btn-facebook {
+               color: #fff;
+               background-color: #3D599A;
+               border-color: rgba(0,0,0,0.2);
+           }
+
+           .btn-google {
+               color: #fff;
+               background-color: #DF4C3A;
+               border-color: rgba(0,0,0,0.2);
+           }
+
+           .btn-social {
+               position: relative;
+               padding-left: 70px;
+               text-align: left;
+               white-space: nowrap;
+               overflow: hidden;
+               text-overflow: ellipsis;
+           }
+
+               .btn-social :first-child {
+                   position: absolute;
+                   left: 0;
+                   top: 0;
+                   bottom: 0;
+                   width: 50px;
+                   line-height: 37px;
+                   font-size: 2.5em;
+                   text-align: center;
+                   vertical-align: central;
+                   border-right: 1px solid rgba(0,0,0,0.2);
+                   background-color: rgba(0,0,0,0.15);
+               }
+
+           .myIonicSocial .ion {
+               display: inline-block;
+               font-family: FontAwesome;
+               font-style: normal;
+               font-weight: normal;
+               line-height: 1;
+               -webkit-font-smoothing: antialiased;
+               -moz-osx-font-smoothing: grayscale;
+           }
+
+
+
+       </style>
+
+    <style>
+        .appColor {
+            color : #BE2633;
+        }
+
+        .bar.bar-assertive {
+            background-color: #BE2633;
+        }
+        .button.button-assertive {
+            background-color: #BE2633;
+        }
+        .checkbox-assertive input:checked:before, .checkbox-assertive input:checked + .checkbox-icon:before {
+            background: #BE2633;
+            border-color: #BE2633;
+        }
+
+        .item-radio input:checked + .radio-content .radio-icon {
+            color: #BE2633;
+        }
+
+        /*.checkbox-royal input:before,
+        .checkbox-royal .checkbox-icon:before {
+          border-color: blue;
+        }*/
+
+        /*.checkbox-royal input:checked:before,
+        .checkbox-royal input:checked + .checkbox-icon:before {
+            background: blue;
+            border-color: blue;
+        }*/
+    </style>
+
+    <style>
+        /** Styling for the username field **/
+        label.item.has-error {
+            border-bottom: 1px solid red;
+        }
+
+        /** Styling for the password field when an error exists**/
+        label.item.has-error-lr {
+            border-left: 2px solid red;
+            border-right: 2px solid red;
+        }
+
+        /** Styling for the password field when an error has been resolved**/
+        label.item.valid-lr {
+            border-left: 2px solid green;
+            border-right: 2px solid green;
+        }
+
+        /** Styling for the error text and container **/
+        .form-errors {
+            margin: 5px 0;
+            margin-bottom: 0px;
+        }
+
+        .form-error {
+            padding: 2px 0 2px 16px;
+            color: red;
+            border-bottom: 0px;
+            background: none;
+        }
+
+        .errordiv {
+            padding: 10px;
+            background-color: #F5F6F1;
+            color: red;
+        }
+
+        .yammzitRadio {
+
+        }
+
+        .yammzitRadio .radio-content{
+            padding: 0px;
+        }
+
+            .yammzitRadio .radio-content .item-content {
+                padding: 0px;
+            }
+
+        .countyName {
+            float:left;
+        }
+
+        .countyImage {
+            height: 50px;
+            width: 50px;
+            float:left;
+            margin-right: 10px;
+        }
+
+        .yammzitSpinner .spinner svg {
+          width: 100px;
+          height: 100px;
+          stroke: #BE2633;
+          fill: transparent;
+        }
+
+        .biggerIcon:before{
+            font-size: 30px !important;
+        }
+
+        .tab-item .icon {
+            display: block;
+            margin: 0 auto;
+            height: 24px;
+            font-size: 24px;
+            padding-top: 3px;
+        }
+
+        .thInlinRateBar {
+        }
+
+        .thInlinRateBar thInlinRateBarDiv{
+            float: left;
+            width: 10px !important;
+            height: 15px !important;
+        }
+
+        .categoriesList {
+            background-color: white;
+            padding-top: 10px;
+        }
+
+            .categoriesList .list {
+                background-color: white !important;
+                padding-top : 20px;
+                padding-bottom : 20px;
+            }
+
+            .categoriesList .list .item-content, .categoriesList .list label {
+                background-color: #F5F6F1;
+                border : 1px solid #E7E8E4;
+                border-bottom : 0px;
+                color : #010101;
+                font-weight : bold;
+            }
+
+            .categoriesList .list label  .item-content {
+                border: none;
+            }
+
+
+
+        .categoriesList .list .selectedCategoryClass .item-content {
+            background-color: #CB525B !important;
+            color: white;
+        }
+
+        .categoriesList .list .selectedCategoryClass .item-content .icon {
+            color: white !important;
+        }
+
+        .categoryIcon {
+            color: #999999;
+            font-size: 24px !important;
+        }
+
+        .selectedCategory .categoryIcon {
+            color: white !important;
+            font-size: 24px !important;
+        }
+
+
+        .ispinner .spinner, .spinner .spinner-android,  .spinner-android{
+            stroke: #BE2633;
+            fill: #BE2633;
+        }
+
+
+        .appCategory {
+            width: 90%;
+            margin: auto;
+            background-color:white;
+        }
+
+        .appChevronColor {
+            color:#DCDCDC;
+        }
+
+        .appChevron {
+            color:#DCDCDC;
+            font-size: 18px !important;
+            font-weight: normal;
+        }
+
+        /*The icons*/
+        .item-icon-left.item-icon-right .icon:first-child, .goodIcon {
+            right: auto;
+        }
+        .item-icon-right .icon, .goodIcon  {
+            right: 11px;
+        }
+        .item-icon-left .icon , .goodIcon {
+            left: 11px;
+        }
+        .item-icon-left .icon, .item-icon-right .icon, .goodIcon  {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -moz-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            font-size: 32px;
+        }
+
+
+        .tab-item .icon {
+            display: block;
+            margin: 0 auto;
+            height: 24px;
+            font-size: 24px;
+            padding-top: 3px;
+            margin-bottom: 6px;
+        }
+
+        .seat-row {
+          width:100%;
+          /*background-color:yellow;*/
+          margin-bottom: 6px;
+        }
+
+        .seat-row-label{
+          display:inline-block;
+          color:#7E7E7E;
+          min-width: 12px;
+        }
+
+        .seat{
+          display:inline-block;
+          color:white;
+          background-color:#7E7E7E;
+          width:20px;
+          height:20px;
+          margin: 1px;
+          border-radius: 5px;
+          margin-right: 4px;
+        }
+
+        .seat-bought{
+          background-color:#BD2532;
+        }
+
+        .seat-selected{
+          background-color:#55E313;
+        }
+
+        .seat-vip{
+          display:inline-block;
+          color:white;
+          /*width:52px;*/
+          height:20px;
+          /*margin: 1px;*/
+          margin-left: 2px;
+          margin-right: 5px;
+        }
+
+        .seat-vip-left{
+          display:inline-block;
+          color:white;
+          background-color:#7E7E7E;
+          width:20px;
+          height:20px;
+          border-radius: 5px 5px 0px 5px;
+          margin: 0px;
+          padding: 0px;
+          border: none;
+          margin-left: -4px;
+        }
+
+        .seat-vip-right{
+          display:inline-block;
+          color:white;
+          background-color:#7E7E7E;
+          width:20px;
+          height:20px;
+          border-radius: 5px 5px 5px 0px;
+          margin: 0px;
+          padding: 0px;
+          border: none;
+          margin-left: -5px;
+        }
+
+
+
+
+
+        .seat-vip-middle{
+          display:inline-block;
+          color:white;
+          width:4px;
+          height: 20px;
+          margin: 0px;
+          padding: 0px;
+          margin-left: -5px;
+          border:none;
+          padding-top: 5px;
+        }
+
+        .seat-vip-middle-top{
+          min-width: 4px;
+          min-height: 4px;
+          width:4px;
+          height: 4px;
+          background-color: white;
+          border:none;
+          display:block;
+        }
+
+        .seat-vip-middle-bottom{
+          min-width: 4px;
+          min-height: 16px;
+          width:4px;
+          height: 16px;
+          border:none;
+          background-color:#7E7E7E;
+          display:block;
+        }
+
+        .seat-vip-right-selected, .seat-vip-left-selected, .seat-vip-middle-bottom-selected {
+          background-color:#55E313;
+        }
+
+        .seat-vip-right-bought, .seat-vip-left-bought , .seat-vip-middle-bottom-bought  {
+          background-color:#BD2532;
+        }
+
+        .seatKeyGreen{
+          display: inline-block;
+          background-color: #55E313;
+          min-width: 20px;
+          height: 20px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 4px;
+          width: 20px;
+          vertical-align: bottom;
+              margin-left: 70px;
+        }
+        .seatKeyRed{
+          display: inline-block;
+          background-color: #BD2532;
+          min-width: 20px;
+          height: 20px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 4px;
+          width: 20px;
+          vertical-align: bottom;
+        }
+        .seatKeyLabel{
+          display: inline-block;
+          color:#8C8C8C;
+          min-width: 20px;
+          height: 20px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          width: 100px;
+          text-align: left;
+        }
+
+        .paymentInput{
+          background-color: #E6E6E6 !important;
+          margin: 0px !important;
+          display: inline-block !important;
+          width:60%;
+          padding-left: 5px;
+        }
+    </style>
+
+
+    <script id="templates/form-errors.html" type="text/ng-template">
+      <div class="form-error" ng-message="required">This field is required.</div>
+      <div class="form-error" ng-message="minlength">This field must be at least 5 characters.</div>
+      <div class="form-error" ng-message="maxlength">This field must be less than 30 characters</div>
+      <div class="form-error" ng-message="email">This needs to be a valid email</div>
+    </script>
+
+
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-assertive" style="height: 100px;">
+      <ion-nav-back-button icon-on="icon-return10"></ion-nav-back-button>
+
+    </ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view style="background-color: black;"></ion-nav-view>
+
+
+
+
+    <!--<script src="https://maps-api-ssl.google.com/maps/api/js?libraries=places"></script>-->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+</body>
+</html>
