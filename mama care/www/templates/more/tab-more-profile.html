@@ -1,0 +1,106 @@
+<ion-view view-title="Your Profile" >
+   <ion-content >
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+    <br />
+    <div style="height:200px;text-align:center;">
+        <img ng-show="user.avatar == null || user.avatar.length == 0" ng-src="{{getImage('local','img/avatar.png')}}" style="width:200px; height:200px; padding:0px; margin:0px; border:2px solid #eae7e7; border-radius:200px;" />
+        <img ng-show="user.avatar != null && user.avatar.length > 0"  ng-src="{{getImage('avatar',user.avatar)}}" style="width:200px; height:200px; padding:0px; margin:0px; border:2px solid #eae7e7; border-radius:200px;" />
+    
+        <div class="row" style="margin-top:-120px;">
+            <div class="col">
+                <a href="#/tab/newsfeeds/user/profile/preview/settings" class="" style="font-size: 20px;background: #F5F6F1; color: black;height:30px; width:30px; border-radius:30px; border:none; " >
+                    <i class="icon ion-gear-a" ></i>
+                </a>
+            </div>
+            <div class="col">
+                
+            </div>
+            <div class="col">
+                <a href="#/tab/newsfeeds/user/profile/preview/edit"  style="font-size: 20px;background: #F5F6F1; color: black;height:30px; width:30px; border-radius:30px; border:none; " >
+                    <i class="icon ion-edit" ></i> 
+                </a>
+            </div>           
+        </div>
+    </div>
+    <ul class="list" style="border-top: none; text-align:center;">
+        <li class="item" style="border-top: none;border-bottom: none;">
+          <strong>{{user.name}}</strong> <br />
+          {{user.city.name + ', ' + user.city.country.name}}
+        </li>       
+    </ul>
+    <div class="list">
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-ios-bell-outline" style="color:#6C6A5B;"></i>
+            <strong>Notifications</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" href="#/tab/more/profile/mymessages" >
+            <i class="icon ion-ios-email" style="color:#6C6A5B;"></i>
+            <strong>Messages</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <div class="item item-divider">
+        </div>
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-ios-people" style="color:#6C6A5B;"></i>
+            <strong>Friends</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-edit" style="color:#6C6A5B;"></i>
+            <strong>Reviews 0</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-ios-camera" style="color:#6C6A5B;"></i>
+            <strong>Photoes and Videos 0</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <div class="item item-divider">
+        </div>
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-person-add" style="color:#6C6A5B;"></i>
+            <strong>Add Friends</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-plus-circled" style="color:#6C6A5B;"></i>
+            <strong>Following</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-ios-plus-outline" style="color:#6C6A5B;"></i>
+            <strong>Followers</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <div class="item item-divider">
+        </div>
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-happy" style="color:#6C6A5B;"></i>
+            <strong>My Events</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" href="#/tab/more/profile/mybussinesses" >
+            <i class="icon ion-ios-home-outline" style="color:#6C6A5B;"></i>
+            <strong>My Businesses</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+        
+        <a class="item item-icon-left item-icon-right" href="#" >
+            <i class="icon ion-ios-home" style="color:#6C6A5B;"></i>
+            <strong>Bussiness added by me</strong>
+            <i class="icon ion-chevron-right" style="color:#DCDCDC;"></i>
+        </a>
+    </div>
+    
+   
+        
+       
+
+   
+
+  </ion-conten>
+</ion-view>

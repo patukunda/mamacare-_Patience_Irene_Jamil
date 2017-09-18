@@ -1,0 +1,96 @@
+/* Empty. Add your own CSS if you like */
+
+.button.ng-hide {
+    display: none;
+}
+
+
+[nav-bar-transition="android"] [nav-bar="active"] .bar, [nav-bar-transition="android"] [nav-bar="entering"] .bar {
+    background: #468C00;
+}
+
+
+#logoName{
+    float: left;
+    font-size: 15px;
+    font-weight: bold;
+    color: #F3F3F3 !important;
+    padding: 0px;
+    margin-top: -9px;
+    padding-left: 4px;
+}
+
+.bar-stable .button.button-clear{
+  color:#A6C884 !important;
+}
+
+s{
+  color: #ce4f02;
+  text-decoration: none;
+}
+
+#kamenuContainer{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 56799999;
+  background-color: rgba(0,0,0,0);
+  padding: 0px;
+  margin: 0px;
+  height: 80px;
+  display: none;
+}
+
+.kamenu{
+    position: absolute;
+    top: 43px;
+    bottom: 0;
+    overflow: hidden;
+    background-color: #060800;
+    right: 6px;
+    padding: 10px;
+    height: 220px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+kamenu:focus {
+    background-color: Aqua;
+}
+
+.kamenu a{
+  display: block;
+  text-decoration: none;
+  color: #C4DFA9;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+#menufocus{
+  /*height:0px;
+  width:0px;
+  min-height:0px;
+  min-width:0px;
+  max-height:0px;
+  max-width:0px;"*/
+  padding-left: 10px;
+}
+
+.noLine{
+  text-decoration: none;
+}
+
+.noLine2{
+  margin-bottom: 4px;
+  text-decoration: none;
+}
+
+.bar.bar-stable .title {
+    color: #F3F3F3;
+}

@@ -1,0 +1,56 @@
+﻿<ion-view view-title="Events">
+  <ion-content >
+    <div class="row" style="background-color:white;padding-top: 1px;padding-bottom: 1px; ">
+          <div class="col" style="text-align:center;padding: 5px 1px 5px 0px;">
+            <div style="color:#BE2533" ng-show="currentSelectedTab == 0" ng-click="changeTab(0)">UPCOMING</div>
+            <div style="color:#787878" ng-hide="currentSelectedTab == 0" ng-click="changeTab(0)">UPCOMING</div>
+          </div>
+          <div class="col" style="text-align:center;padding: 5px 1px 5px 0px;">
+            <div style="color:#BE2533" ng-show="currentSelectedTab == 1" ng-click="changeTab(1)">INVITES</div>
+            <div style="color:#787878" ng-hide="currentSelectedTab == 1" ng-click="changeTab(1)">INVITES</div>
+          </div>
+          <div class="col" style="text-align:center;padding: 5px 1px 5px 0px;">
+            <div style="color:#BE2533" ng-show="currentSelectedTab == 2" ng-click="changeTab(2)">PAST EVENTS</div>
+            <div style="color:#787878" ng-hide="currentSelectedTab == 2" ng-click="changeTab(2)">PAST EVENTS</div>
+          </div>
+     </div>
+     <!-- upcoming events container -->
+     <div class="row" ng-show="currentSelectedTab == 0"  style="background-color:white;padding-top: 1px;padding-bottom: 1px; ">
+        <!-- events preview -->
+        <div style="width:100%">
+          <!-- if there are no upcoming events -->
+          <div ng-show="events.upcoming.length == 0">
+            No events coming up.
+          </div>
+          <!-- if there are some upcoming events -->
+          <div ng-show="events.upcoming.length >  0" class="list">
+            <div class="list">
+              <a
+                  ng-repeat="event in events.upcoming track by $index"
+                  class="item item-thumbnail-left"
+                  href="#/businessprofile/{{event.id}}"
+                  style="border:none; margin-bottom: 5px; padding-bottom:1px;">
+                  <img
+                      ng-src="{{getImage('logo', event.image)}}"
+                      />
+                  <h2><strong>{{event.title}}</strong></h2>
+                  <p>{{event.start_time + ' - ' + event.end_time}}</p>
+                  <p>{{event.cityName + ', ' + event.countryName }}</p>
+                  <p>{{event.areMyInterested}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+     </div>
+
+     <!-- invites container -->
+     <div class="row"   ng-show="currentSelectedTab == 1" style="background-color:white;padding-top: 1px;padding-bottom: 1px; ">
+       INVITES TAB
+     </div>
+
+     <!-- past events container -->
+     <div class="row"   ng-show="currentSelectedTab == 2" style="background-color:white;padding-top: 1px;padding-bottom: 1px; ">
+       PAST EVENTS TAB
+     </div>
+  </ion-content>
+</ion-view>

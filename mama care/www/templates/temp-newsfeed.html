@@ -1,0 +1,91 @@
+<div class="card"
+    style="width:100%; margin-left: 0px; margin-right: 0px;  margin-top: 5px; margin-bottom: 0px !important;">
+	 <!--<a
+       ng-href="{{getBusinessLink(nf.business.id)}}"
+       class="item item-avatar"
+       style="width:96% !important; border-bottom: 2px solid #E7E7E7; margin:auto; padding-bottom:0px !important;">
+	      <img
+	          ng-src="{{getImage('logo',nf.business.logo)}}"
+	          style="margin-left:-12px; padding-bottom:0px !important; border-radius: 0px; ">
+	    <h2 style="margin-left:-10px;">{{nf.business.name}}</h2>
+	    <p style="margin-left:-10px; padding-bottom:0px !important;" >{{nf.business.address}}</p>
+	  </a>-->
+
+	  <div 
+        class="item item-avatar"
+        style="border-bottom: none; border-top: none; padding-bottom:2px; min-height:initial">
+	    <img ng-src="{{getImage('avatar',nf.user.avatar )}}" style="min-height:initial">
+	    <h2 style="font-size: 14px; float:left; white-space:normal ; line-height: 1.5; min-height:40px;"   >
+            <a 
+                style="color:black; font-size: 14px; text-decoration:none"
+                ng-href="{{( (nf.user.id != user.id ) ? ('#/userprofile/' + nf.user.id ) : ('#/myprofile/0')   ) }}">
+                <strong>
+                    {{nf.id + " " + nf.user.first_name + " " + nf.user.last_name}}
+                </strong> 
+            </a>
+            {{(nf.cost < 0)? 'wrote a review on'  : 'rated'}}
+            <a 
+                style="color:black; font-size: 14px; text-decoration:none"
+                ng-href="{{getBusinessLink(nf.business.id)}}">
+                <strong>
+                    {{nf.business.name}}
+                </strong> 
+            </a>
+	    </h2>
+	    <div style="clear:both"></div>
+	  </div>
+      <div ng-show="nf.cost > -1" class="item-body" style="font-size:12px; font-size:14px; padding-top:0px; padding-bottom:0px; background-colorx: blue">
+        <span style="color:#D3D3D1;">{{nf.date_created}}</span>&nbsp;&nbsp;<span  style="color:#D3D3D1;" am-time-ago="nf.date_created"></span>           
+        <div style="float:right"> {{getRate(nf.cost, true)}}
+            <div ng-repeat="i in rate.fill track by $index"  class="icon ion-social-usd thInlinRateBarDiv" style="color:#31B645; float: left; width: 15px !important;"></div>
+            <div ng-repeat="i in rate.stroke track by $index" class="icon ion-social-usd-outline thInlinRateBarDiv" style="color:#31B645; float: left; width: 15px !important;"></div>
+            {{rate.brief}}
+            <div style="clear:both"></div>
+        </div>
+	  </div>
+	  <div ng-show="nf.good > -1" class="item-body" style="margin-left:0px; font-size:15px; padding-top:0px; padding-bottom:2px;  background-colorx: pink" >
+            <!--<span style="font-size:12px;">{{nf.user.reviews}} REIEWS, {{nf.user.followers}} FOLLOWERS</span>-->
+            <div style="float:right"> {{getRate(nf.good, false)}}
+                <div ng-repeat="i in rate.fill track by $index" class="icon ion-star" style="color:#CE202A; float: left; width: 15px !important;"></div>
+                <div ng-repeat="i in rate.stroke track by $index" class="icon ion-android-star-outline" style="color:#CE202A; float: left; width: 15px !important;"></div>
+                {{rate.brief}}
+                <div style="clear:both"></div>
+            </div>
+            <div style="clear:both"></div>
+	  </div>
+	  <!-- <div class="item item-image">
+	    <img src="{{}}">
+	  </div> -->
+	  <div class="item item-body" style="border-top: none; padding-top:0px; border-bottom: none;">
+	    <p style="margin-top:0px;">
+	      {{nf.details}}
+	    </p>
+      </div>
+      <div style="width:96%;height:2px; background-color:#E7E7E7;margin:auto;"></div>
+      <div class="item tabs tabs-secondary tabs-icon-left tabs-color-dark" style="border:none !important; background:none;">
+        <a ng-show="iLike(nf.id)" ng-click="unlike(nf.id)" class="tab-item" href="#" style="text-align: left; padding-left: 20px;">	      
+	      <i class="icon ion-thumbsup" style="color:#BE2633 !important;"></i>
+	      <span style="margin-top: 22px;line-height: 12px;display: inline-block;">{{nf.likes.length}}&nbsp;Like</span><span ng-show="nf.likes.length != 1">s</span>
+	    </a>
+	    <a ng-show="!(iLike(nf.id))" ng-click="like(nf.id)" class="tab-item" href="#" style="text-align: left; padding-left: 20px;">
+	       <i class="icon ion-thumbsup"></i>
+            <span style="margin-top: 22px;line-height: 12px;display: inline-block;">{{nf.likes.length}}&nbsp;Like</span><span ng-show="nf.likes.length != 1">s</span>
+	    </a>
+
+	    <a ng-show="commentLink == undefined || commentLink == null" class="tab-item" href="#/tab/newsfeeds/{{nf.id}}">
+	      <i class="icon ion-chatbox"></i>
+          <span style="margin-top: 22px;line-height: 12px;display: inline-block;">{{nf.comments.length}}&nbsp;Comments </span>
+	    </a>
+
+        <a ng-show="commentLink != undefined && commentLink != null" class="tab-item" href="#{{ commentLink + nf.id}}">
+	      <i class="icon ion-chatbox"></i>
+          <span style="margin-top: 22px;line-height: 12px;display: inline-block;">{{nf.comments.length}}&nbsp;Comments </span>
+	    </a>
+
+
+
+	    <a class="tab-item" href="#"  style="text-align: right; padding-right: 20px; " ng-click="share(nf.id,nf.kind);">
+	      <i class="icon ion-android-share-alt" ></i><span style="margin-top: 22px;line-height: 12px;display: inline-block;">Share</span>
+	    </a>
+	  </div>
+</div>

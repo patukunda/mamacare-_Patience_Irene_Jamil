@@ -1,0 +1,171 @@
+<ion-view view-title="Search" class="wrapper"  >
+
+    <style>
+        #feedSlider .slider-pager {
+            text-align: left !important;
+            color: white !important;
+            padding-left: 15px;
+        }
+
+        #feedSlider .slider-pager-page {
+            color: white !important;
+        }
+
+        .yammza .item-thumbnail-left, .item-thumbnail-left .item-content {
+            padding-top: 0px !important;
+            padding-left: 106px !important;
+            padding-bottom: 0px !important;
+            /*background-color: red !important;*/
+            min-height: 50px;
+        }
+
+        
+    </style>
+ 
+
+  <ion-content scroll="false">
+      <div class="bar bar-header" style="background-color:#BE2633;">
+
+            <label class="item item-input-inset" style="border-radius: 8px; width:90%; margin-right:5px; height:20px;margin-top:5px;"  >
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="text" placeholder="" class="input-small" ng-model="$parent.filterResults" ng-keyup="$parent.keyPressed($event)"   />
+            </label>
+
+            <button class="button button-assertive icon ion-android-cancel" ng-click="clearFilter()" ></button>
+       </div>
+  </ion-content>
+   
+	
+  <ion-content scroll="true" class="has-header"  >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <p style="padding:5px;padding-left:10px;padding-bottom:0px;margin-bottom:3px;margin-top:50px;" ng-show="slides != null && slides != undefined && slides.length > 0"  >Sponsored</p>
+
+       <ion-slide-box auto-play="true" does-continue="true" slide-interval="4000" ng-show="slides != null && slides != undefined && slides.length > 0" style="height:150px; color:yellow; margin-bottom:10px; background-color: white" >
+	      <ion-slide ng-repeat="slide in slides" >
+	        <div class="box blue" style="height:150px; width:100%; background-color:white; padding-left:10px;" >
+	    	    <img ng-src="{{getImage('slide',slide.slide_image)}}" style="width:390px; height:150px; border-radius:10px;"   />
+	    	    <h3 style="position:relative;background-color: rgba(0,0,0,0.1); margin-top:-60px;color:white; width: 390px; padding: 5px; " >{{slide.business.name}}</h3>
+	    	    <p style="position:relative;background-color: rgba(0,0,0,0.1); margin-top:-15px;color:white; width: 390px;padding-left: 5px;  ">{{slide.business.address}}</p>
+	        </div>
+	      </ion-slide>
+	    </ion-slide-box>
+
+        <div style="height:50px; width:100px;" ng-show="slides == null || slides == undefined || slides.length == 0"></div>
+    
+
+
+       <div style="width:100%;height:4px;background-color:#E7E7E7"></div>
+
+      <ion-infinite-scroll ng-show="undefined == results || results == null" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+      <div class="row" ng-show="results.found.sorted.length > 0"  style="margin-bottom:10px;">
+           <div class="col" style="text-align:center; padding: 1px;"  >
+                <div ng-show="activeUpperFilter == 1" ng-click="setUpperFilter(1)" style="background-color:#BE2632; text-align:center;  height:25px ; padding-top:2px; color:white" >
+                    All
+                </div>
+               <div ng-show="activeUpperFilter != 1" ng-click="setUpperFilter(1)" style="background-color:#E5E5E5; text-align:center;  height:25px ; padding-top:2px; " >
+                    All
+                </div>
+           </div>
+           <div class="col" style="text-align:center; padding: 1px;"  >
+               <div ng-show="activeUpperFilter == 2"  ng-click="setUpperFilter(2,$event)" style="background-color:#BE2632; text-align:center;  height:25px ; padding-top:2px;  color:white" >
+                   {{country != null ? country.name : 'Country'}}
+               </div>
+               <div ng-show="activeUpperFilter != 2"  ng-click="setUpperFilter(2,$event)" style="background-color:#E5E5E5; text-align:center;  height:25px ; padding-top:2px;" >
+                   {{country != null ? country.name : 'Country'}}
+               </div>
+           </div>
+           <div class="col" style="text-align:center; padding: 1px;"  >
+               <div ng-show="activeUpperFilter == 3"  ng-click="setUpperFilter(3,$event)"  style="background-color:#BE2632; text-align:center;  height:25px ; padding-top:2px; color:white" >
+                   {{city != null ? city.name : 'City'}}
+               </div>
+               <div ng-show="activeUpperFilter != 3"  ng-click="setUpperFilter(3,$event)"  style="background-color:#E5E5E5; text-align:center;  height:25px ; padding-top:2px;" >
+                   {{city != null ? city.name : 'City'}}
+               </div>
+           </div>
+       </div>
+
+       <div class="row" ng-show="results.found.sorted.length > 0">
+           <div class="col" style="text-align:center; padding: 1px;" >
+               <div ng-show="activeLowerFilter == 1"  ng-click="setLowerFilter(1)"  style="background-color:#BE2632; text-align:center;  height:25px ; padding-top:2px; color:white" >
+                   Business
+               </div>
+               <div ng-show="activeLowerFilter != 1"  ng-click="setLowerFilter(1)"  style="background-color:#E5E5E5; text-align:center;  height:25px ; padding-top:2px;" >
+                   Business
+               </div>
+           </div>
+           <div class="col" style="text-align:center; padding: 1px;" >
+               <div ng-show="activeLowerFilter == 2"  ng-click="setLowerFilter(2)"  style="background-color:#BE2632; text-align:center;  height:25px ; padding-top:2px; color:white" >
+                   People
+               </div>
+               <div ng-show="activeLowerFilter != 2"  ng-click="setLowerFilter(2)"  style="background-color:#E5E5E5; text-align:center;  height:25px ; padding-top:2px;" >
+                   People
+               </div>
+           </div>
+           <div class="col" style="text-align:center; padding: 1px;" >
+               <div ng-show="activeLowerFilter == 3"  ng-click="setLowerFilter(3)"  style="background-color:#BE2632; text-align:center;  height:25px ; padding-top:2px; color:white" >
+                   Events
+               </div>
+               <div ng-show="activeLowerFilter != 3"  ng-click="setLowerFilter(3)"  style="background-color:#E5E5E5; text-align:center;  height:25px ; padding-top:2px;" >
+                   Events
+               </div>
+           </div>
+           <div class="col" style="text-align:center; padding: 1px;" >
+               <div ng-show="activeLowerFilter == 4"  ng-click="setLowerFilter(4)"  style="background-color:#BE2632; text-align:center;  height:25px ; padding-top:2px; color:white" >
+                   Gossip
+               </div>
+               <div ng-show="activeLowerFilter != 4"  ng-click="setLowerFilter(4)"  style="background-color:#E5E5E5; text-align:center;  height:25px ; padding-top:2px;" >
+                   Gossip
+               </div>
+           </div>
+       </div>
+
+
+       <div class="row" ng-show="results.data.length == 0">
+           <div class="col"  style="text-align:center; padding-top:60px;">
+               <img src="img/No search results.png" style="width:60%; height: 60%; "   />
+           </div>
+       </div>
+
+      <div class="row" ng-show="results.data.length > 0">
+           <div class="col" >
+               <div class="" ng-repeat="result in results.data">
+                   <div ng-include="result.template"></div>
+               </div>
+           </div>
+      </div>
+
+      
+
+      <div class="row" ng-show="results.data.length > 0 && results.found.businesses.length == 0 && activeLowerFilter == 1">
+           <div class="col"  style="text-align:center; padding-top:60px;">
+               <img src="img/No business.png" style="width:60%; height: 60%; "   />
+           </div>
+       </div>
+
+      <div class="row" ng-show="results.data.length > 0 && results.found.people.length == 0 && activeLowerFilter == 2">
+           <div class="col"  style="text-align:center; padding-top:60px;">
+               <img src="img/No people.png" style="width:60%; height: 60%; "   />
+           </div>
+       </div>
+
+      <div class="row" ng-show="results.data.length > 0 && results.found.events.length == 0 && activeLowerFilter == 3">
+           <div class="col"  style="text-align:center; padding-top:60px;">
+               <img src="img/No events.png" style="width:60%; height: 60%; "   />
+           </div>
+       </div>
+
+      <div class="row" ng-show="results.data.length > 0 && results.found.gossip.length == 0 && activeLowerFilter == 4">
+           <div class="col"  style="text-align:center; padding-top:60px;">
+               <img src="img/No Gossips.png" style="width:60%; height: 60%; "   />
+           </div>
+       </div>
+
+       
+      
+
+  </ion-content>
+</ion-view>

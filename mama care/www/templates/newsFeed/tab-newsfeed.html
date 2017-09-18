@@ -1,0 +1,88 @@
+﻿<ion-view  view-title="Review Comments" class="wrapper"  >
+	
+  <ion-content overflow-scroll="true" style="background-color:#E8E8E8; padding-top: 0px;"  >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+      <style>
+        #feedSlider .slider-pager {
+            text-align: left !important;
+            color: white !important;
+            padding-left: 15px;
+        }
+
+        #feedSlider .slider-pager-page {
+            color: white !important;
+        }
+
+        .yammza .item-thumbnail-left, .item-thumbnail-left .item-content {
+            padding-top: 0px !important;
+            padding-left: 106px !important;
+            padding-bottom: 0px !important;
+            /*background-color: red !important;*/
+            min-height: 50px; 
+        }
+    </style>
+
+      <div class="list" style="margin-top:0px; padding-top:0px;" >
+        <div ng-include src="'templates/temp-newsfeed'+nf.kind+'.html'"  ></div>
+
+        
+        <div 
+            class="card" 
+            style="width:100%; margin-left: 0px; margin-right: 0px; margin-top: 5px; margin-bottom: 5px;"
+            ng-repeat="comment in nf.comments  track by $index">            
+	        <div class="item item-avatar" style="border-bottom: none; border-top: none;">
+	            <img ng-src="{{getImage('avatar',comment.user.avatar)}}">
+	            <h2>{{comment.user.first_name}} {{comment.user.last_name}}</h2>
+	            <p style="font-size:12px; font-size:14px;">
+                    <span  style="color:#D3D3D1;" >{{correctTime(comment.time_created)}}</span>
+	            </p>
+	        </div>
+
+	        <div class="item item-body" style="border-top: none; padding-top:0px; border-bottom: none;">
+	            <p style="margin-top:0px;">
+	              {{comment.details}}
+	            </p>
+            </div>
+            <div style="width:96%;height:2px; background-color:#E7E7E7;margin:auto;"></div>
+            <div class="item tabs tabs-secondary tabs-icon-left tabs-color-dark" style="border:none !important; background:none;">
+	            <a ng-show="iLikeComment(nf.id, comment.id)"  ng-click="unlikeComment(nf.id,comment.id)"   class="tab-item" href="#" style="text-align: left; padding-left: 20px;">
+                  <i class="icon ion-thumbsup" style="color:#BE2633 !important;" ></i>
+                  <span style="color:#BE2633 !important; margin-top: 22px;line-height: 12px;display: inline-block;">{{comment.likes.length}}&nbsp; Likes </span>
+	            </a>
+
+                <a ng-show="!(iLikeComment(nf.id, comment.id))" ng-click="likeComment(nf.id,comment.id)"  class="tab-item" href="#" style="text-align: left; padding-left: 20px;">
+	              <i class="icon ion-thumbsup"></i>
+                  <span style="margin-top: 22px;line-height: 12px;display: inline-block;">{{comment.likes.length}}&nbsp; Likes </span>
+	            </a>
+
+	            <a class="tab-item" href="#" >
+	              &nbsp;<!--<span>{{nf.comments.length}}</span>&nbsp;<i class="icon ion-chatbox"></i><span style="margin-top: 22px;line-height: 12px;display: inline-block;"> Comment </span>   -->            
+	            </a>
+	            <a class="tab-item" href="#"  style="text-align: right; padding-right: 20px; ">
+	              &nbsp;<!--<i class="icon ion-android-share-alt" ></i><span style="margin-top: 22px;line-height: 12px;display: inline-block;">Share</span>-->
+	            </a>
+	        </div>
+        </div>
+        <br /><br /><br /><br /><br /><br /><br /><br />
+      </div>   
+  </ion-content>
+
+    <div style="position: fixed; bottom: 0px; width:100%; background-color: #c2bbbb; border-top: 1px solid #c2bbbb;" >
+          <span>
+          <textarea 
+              ng-model="comment.details" 
+              placeholder="Write a commment" 
+              style="background-color:bluex;min-width:80%; float: left; padding-left:5px; padding-right:5px;"
+              rows="3"
+              ></textarea>
+          <button 
+              ng-click="addReviewComment()" 
+              class="button button-assertive" 
+              style="text-align:center; color: white; background-color:#BE2633; float: left; width: 20%; height: 100%"
+              >Post</button>
+          </span>
+      </div>
+</ion-view>

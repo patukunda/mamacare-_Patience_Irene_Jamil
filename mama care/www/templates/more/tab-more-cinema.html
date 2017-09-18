@@ -1,0 +1,43 @@
+<ion-view view-title="Cinema">
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+    <ion-infinite-scroll ng-show="loaded == false" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+    <div style=" width:100%; text-align:center "  ng-show="loaded == true && cinemas.length == 0">
+        <br />
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+    </div>
+    <div ng-show="loaded == true && cinemas.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >There are no cinemas</div>
+
+
+
+
+    <div class="list" >
+        <a
+            ng-repeat="business in cinemas"
+            class="item item-thumbnail-left"
+            href="#/tab/more/cinema/selectmovie/{{business.id}}"
+            style="border-top:none; margin-bottom: 5px; padding-bottom:1px;">
+            <img
+                ng-src="{{getImage('logo',business.logo )}}"
+                />
+            <div style="padding-left: 30px;">
+              <i class="icon icon-map-pointer7"
+              style="font-size: 35px; position: absolute; left: 103px; color: #797979; margin-top: 2px;"  ></i>
+              <h2 style="color:#BD2532;"><strong>{{business.name}}</strong></h2>
+              <h3 style="margin-top:5px; color:#919392;">{{business.address}}</h3>
+            </div>
+            <p style="padding-top: 5px; padding-left:10px; color: #9B9B9B;">Category: Cinema</p>
+            <div style="background-colorx:yellow; width:100% !important; text-align: left; padding-left:10px;">
+                {{getRate(business.good, false)}}
+                <i ng-repeat="i in rate.fill track by $index" class="icon ion-star" style="color:#C71518;  display:inline-block; width: 10px !important; font-size:25px; margin-right:15px"></i>
+                <i class="icon ion-android-star-outline" ng-repeat="i in rate.stroke track by $index" style="color:#C71518; display:inline-block; width: 10px !important; font-size:25px; margin-right:15px"></i>
+            </div>
+        </a>
+    </div>
+  </ion-content>
+</ion-view>

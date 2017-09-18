@@ -1,0 +1,25 @@
+﻿<ion-view view-title="User Photoes" class="wrapper" >
+
+   <ion-content  style="background-color:#E7E7E7">
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+       <div style="
+            width:100%; 
+            height: 420px;
+            background-image: url('img/nophotogallerygenerally.jpg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-color:pinkx"
+            ng-show="items.length == null || items.length == 0"
+           >
+        </div>
+
+
+       <ion-gallery ng-show="items.length > 0" ion-gallery-items="items"></ion-gallery>
+
+       
+   </ion-content>
+</ion-view>

@@ -1,0 +1,36 @@
+﻿<ion-view view-title="Favourites">
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+
+    <ion-infinite-scroll ng-show="undefined == favorites || favorites == null" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+    <div style=" width:100%; text-align:center "  ng-show="favorites != null && favorites.length == 0">
+        <br />
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+    </div>
+    <div ng-show="favorites != null && favorites.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >You have no favourites</div>
+
+
+
+
+    <div class="list" >
+        <a 
+            ng-repeat="business in favorites"
+            class="item item-thumbnail-left" 
+            href="#/businessprofile/{{business.id}}"
+            style="border-top:none; margin-bottom: 5px; padding-bottom:1px;">
+            <img 
+                ng-src="{{getImage('logo',business.logo )}}"
+                />
+            <h2><strong>{{business.name}}</strong></h2>
+            <p><i class="icon ion-ios-location"></i> {{business.city.name + ', ' + business.city.country.name }}</p>
+            <p><i class="icon ion-cube"></i> {{business.address}}</p>
+            <p><i class="icon ion-ios-telephone"></i> {{business.phone_1}} </p>
+        </a>
+    </div>
+  </ion-content>
+</ion-view>

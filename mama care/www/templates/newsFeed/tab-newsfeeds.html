@@ -1,0 +1,77 @@
+<ion-view  view-title="" class="wrapper"  >
+
+    <style>
+        #feedSlider .slider-pager {
+            text-align: left !important;
+            color: white !important;
+            padding-left: 15px;
+        }
+
+        #feedSlider .slider-pager-page {
+            color: white !important;
+        }
+
+        .yammza .item-thumbnail-left, .item-thumbnail-left .item-content {
+            padding-top: 0px !important;
+            padding-left: 106px !important;
+            padding-bottom: 0px !important;
+            /*background-color: red !important;*/
+            min-height: 50px;
+        }
+    </style>
+
+  <ion-nav-buttons side="left">
+
+        <div class="bar bar-header" style="text-align:center;" >
+            <div ng-show="areWeConnected == true" style="font-weight:400; font-size: 16px; text-align:center; padding-top:10px; width:100%;">
+                <span ng-show="CityName != null && CityName.length >= 2"><i class="ion ion-location"></i> {{CityName}}</span>
+                <span ng-hide="CityName != null && CityName.length >= 2">Yammzit</span>
+            </div>
+            <div ng-show="areWeConnected == false" style="font-weight:400; font-size: 16px; text-align:center; padding-top:10px; width:100%;"> Yammzit [Offline]</div>
+	    </div>
+
+    </ion-nav-buttons>
+
+  <ion-content scroll="false">
+      <div class="bar bar-header" style="background-color:#BE2633;">
+
+            <label class="item item-input-inset" style="border-radius: 8px; width:70%; margin-right:20px; height:20px;margin-top:5px;"  >
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" class="input-small"  ng-model="$parent.searchStr" ng-keyup="$parent.keyPressed($event)"  >
+            </label>
+
+            <a class="button button-assertive  icon icon-shop3 biggerIcon"  href="#/tab/newsfeeds/addabusiness/0"  ></a>
+            <a class="button button-assertive icon ion-person pull-right" href="#/myprofile/0" ></a>
+       </div>
+  </ion-content>
+
+
+  <ion-content overflow-scroll="true" class="has-header" style="background-color:redo;">
+    <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>-->
+  	<ion-slide-box auto-play="true" does-continue="true" slide-interval="4000" ng-show="slides != null && slides != undefined && slides.length > 0" style="height:250px; width:100%; color:white; background-color: greeno; margin-top:30px;"  >
+	  <ion-slide ng-repeat="slide in slides" style=" background-color: #808080; "  >
+        <img ng-src="{{getImage('slide',slide.slide_image)}}" style="height:250px; width:400px;"  />
+	    <h1 style=" font-size:16px; margin-top:-60px;margin-left:20px;color:white; width:300px;">
+            {{slide.business.name}}
+            <span class="badge badge-energized" style="border-radius:0px; font-size:10px;padding:2.5px; padding-left: 5px;padding-right: 5px;" >AD</span></h1>
+	    <p style="margin-top:-10px;margin-left:20px;color:white; width:300px; font-size:14px;" >{{slide.business.address}}</p>
+	  </ion-slide>
+	</ion-slide-box>
+
+    <div style="height:50px; width:100px;" ng-show="slides == null || slides == undefined || slides.length == 0"></div>
+
+    <!-- <form method="Post" action="http://yammzit.com/mobile/kvn.php">
+        <button type="submit" calss="button" >Send</button>
+    </form> -->
+  	<div class="list yammza" ng-repeat="nf in newsFeeds track by $index" style="margin-bottom: 2px; background-color:#E8E8E8; overflow-x:hidden"  >
+          <div ng-include src="'templates/temp-newsfeed'+nf.kind+'.html'"  ></div>
+          <!--<div ng-include src="'templates/temp-newsfeedbusiness_edit_some_info.html'"  ></div>-->
+	</div>
+    <br />
+    <br />
+    <ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-show="loadMoreBottomNewsFeeds==true"> </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

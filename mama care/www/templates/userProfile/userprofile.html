@@ -1,0 +1,87 @@
+﻿<ion-view view-title="{{thisUser.first_name + ' ' +thisUser.last_name}}" class="wrapper" >
+
+   <ion-content  style="background-color:#E7E7E7">
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <div style="height:200px;text-align:center; background-color: white;"> 
+            <img 
+                ng-src="{{getImage('avatar',thisUser.avatar)}}" 
+                style="width:200px; height:200px; padding:0px; margin:0px; border:2px solid #eae7e7; border-radius:250px;" />                 
+       </div>
+       <ul class="list" style="border-top: none; text-align:center; margin-bottom: 0px;">
+            <li class="item" style="border-top: none;border-bottom: none;">
+              <strong>{{thisUser.first_name + " " +thisUser.last_name}}</strong> <br />
+              {{thisUser.city.name + ', ' + thisUser.city.country.name}}
+            </li>       
+        </ul>
+       <div class="row" style="background-color:black;padding-top: 1px;padding-bottom: 1px;">
+          <div class="col tabs-icon-top" style="background-color:black;text-align:center;padding: 5px 1px 5px 0px;">
+              <a ng-show="!ifollow" class="tab-item" style="color:#CFCBC8;background-color:#231e1a; font-size:12px;" ng-click="follow(thisUser.id)" >
+                <i class="icon ion-ios-plus"></i>
+                Follow
+              </a>
+              <a ng-show="ifollow" class="tab-item" style="color:#CFCBC8;background-color:#231e1a; font-size:12px;" ng-click="unfollow(thisUser.id)" >
+                <i class="icon ion-android-checkmark-circle" style="color:red"></i>
+                Following
+              </a>
+          </div>
+          <div class="col tabs-icon-top" style="background-color:black;text-align:center;padding: 5px 1px 5px 0px;">
+              <a ng-show="amfriend == 0" class="tab-item" style="color:#CFCBC8;background-color:#231e1a; font-size:12px;" ng-click="friend(thisUser.id)" >
+                <i class="icon icon-user117"></i>
+                Add Friend
+              </a>
+              <a ng-show="amfriend == 1" class="tab-item" style="color:#CFCBC8;background-color:#231e1a; font-size:12px;" >
+                <i class="icon icon-network60"></i>
+                Request Sent
+              </a>
+              <a ng-show="amfriend == 2" class="tab-item" style="color:#CFCBC8;background-color:#231e1a; font-size:12px;" ng-click="unfriend(thisUser.id)" >
+                <i class="icon icon-network60" style="color:red;"></i>
+                Friends
+              </a>
+          </div>
+          <div class="col tabs-icon-top" style="background-color:black;text-align:center;padding: 5px 1px 5px 0px; font-size:12px;">
+              <a href="#/userprofile/messages/"  class="tab-item" style="color:#CFCBC8;background-color:#231e1a">
+                <i class="icon icon-email5"></i>
+                Message
+              </a>
+          </div>
+
+          <div class="col tabs-icon-top" style="background-color:black;text-align:center;padding: 5px 1px 5px 0px; font-size:12px;">
+              <a href="#/userprofile/photoes/" class="tab-item" style="color:#CFCBC8;background-color:#231e1a">
+                <i class="icon ion-camera"></i>
+                Photoes
+              </a>
+          </div>
+
+          <div class="col tabs-icon-top" style="background-color:black;text-align:center;padding: 5px 1px 5px 0px; font-size:12px;">
+              <a href="#" class="tab-item" style="color:#CFCBC8;background-color:#231e1a">
+                <i class="icon ion-android-share-alt"></i>
+                share
+              </a>              
+          </div>
+        </div>
+       
+	    <a class="item item-icon-left item-icon-right" href="#/userprofile/info/" style="background-color:#E0E0E0;">
+		    <i class="icon ion-information-circled"></i>
+		    Information
+            <span style="color:#9E9E9E; float: right;">MORE</span><i class="icon ion-chevron-right appChevron" style="color:#9E9E9E;"></i>
+	    </a>
+        <div style="width:90%; height:3px; background-color:white; margin: auto;"></div>
+	    <a class="item item-icon-left" href="#" style="background-color:#E0E0E0;border-top:0px solid white;">
+	    </a>
+
+        <!--<div class="list yammza" ng-repeat="nf in thisUser.reviews | limitTo: 3" style="margin-bottom: 2px;"  >
+  		    <div ng-include src="(nf.kind == newsFeedKinds.review)?'templates/temp-newsfeed.html': 'templates/temp-newsfeedadd.html'"  ></div>
+	    </div>-->
+
+        <div class="list yammza" ng-repeat="nf in thisUser.reviews track by $index" style="margin-bottom: 2px; background-color:#E8E8E8; overflow-x:hidden"  >
+          <div ng-include ng-hide="nf.kind == 'tip_add_business' || nf.kind == 'tip_follow_businesses' || nf.kind == 'tip_follow_people' ||  nf.kind == 'tip_search_friends' ||  nf.kind == 'tip_support' ||  nf.kind == 'tip_welcome' " src="'templates/temp-newsfeed'+nf.kind+'.html'"  ></div>
+	    </div>
+        <br />
+        <br />
+        <ion-infinite-scroll on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+		
+   </ion-content>
+</ion-view>

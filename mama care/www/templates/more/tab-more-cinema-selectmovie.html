@@ -1,0 +1,72 @@
+<ion-view view-title="Select Movie">
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+    <ion-infinite-scroll ng-show="loaded == false" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+    <div style=" width:100%; text-align:center "  ng-show="loaded == true && movies.length == 0">
+        <br />
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+    </div>
+    <div ng-show="loaded == true  && movies.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >There are no movies</div>
+
+
+
+
+    <div class="list" style="padding-left:0px;" >
+        <a
+            href="#/tab/more/cinema/selectmovie/selectdate/{{movie.id}}"
+            ng-repeat="movie in movies"
+            class="item item-thumbnail-left"
+            style="
+              border-top: none;
+              margin-top: 5px;
+              padding-bottom: 1px;
+              overflow: visible;
+              height: 140px;
+              padding-left: 110px;
+              background-color: #E6E6E6;
+            ">
+            <img
+                ng-src="{{getImage('moviecover',movie.cover_photo )}}"
+                style="max-height:140px; max-width:100px; width:100px; height:140px; padding-left:0px; left: 0px; top: 0px;"
+                />
+            <div style="max-width:80%; height:60px; overflow:hidden">
+              <h2 style="color:#2C2C2C; white-space: normal;"><strong>{{movie.tittle}}</strong></h2>
+            </div>
+            <p style="padding-top: 5px;color: #9B9B9B;">({{movie.parental_control}}) {{movie.language}}</p>
+            <p style="padding-top: 5px;color: #9B9B9B;">Running time: {{movie.movie_length_hour}}hr {{movie.movie_length_min}}hr</p>
+            <div
+               style="
+                min-height: 60px;
+                max-width: 60px;
+                background-color: #BD2532;
+                color: white;
+                display: inline-block;
+                height: 60px;
+                width: 60px;
+                border-radius: 50%;
+                right: 10px;
+                top: 40px;
+                position: absolute;
+                text-align: center;
+                padding-top: 11px;
+                text-decoration: none;
+                font-size: 11px;
+              "
+               >
+               <i class="icon icon-pass3"
+               style="color: white;
+                      font-size: 15px;
+                      position: absolute;
+                      right: 40%;
+                      top: 30%;"></i> <br/>
+               BUY
+            </div>
+        </a>
+    </div>
+  </ion-content>
+</ion-view>

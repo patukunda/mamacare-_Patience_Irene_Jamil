@@ -1,0 +1,76 @@
+﻿<ion-view view-title="{{message.user.first_name + '  ' + message.user.last_name }}"  > 
+  <ion-content scroll="true" >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+      <style>
+          .myText {
+              background-color:#BD2532; 
+              color:white; 
+              float: right; 
+              max-width:70%;
+              text-align: left;
+              border-radius:15px;
+              padding-top:5px;
+              padding-bottom:5px;
+              padding-right:10px;
+              padding-left:10px;
+              margin-right: 20px;
+          }
+              .myText span {
+                  position: absolute;
+                  right: 10px;
+              }
+          .hisText {
+              background-color:#F0F0F0; 
+              color:black; 
+              float: left; 
+              max-width:70%;
+              text-align: left;
+              border-radius:15px;
+              padding-top:5px;
+              padding-bottom:5px;
+              padding-right:10px;
+              padding-left:10px;
+              margin-left: 50px;
+          }
+              .hisText img {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 100px;
+                  position: absolute;
+                  margin-left: -55px;
+              }
+        .chatTime {
+            text-align: center;
+            width: 100%;
+            color: #B3B3B3;
+            margin-top:10px;
+        }
+      </style>
+      <div 
+          class="" 
+          style="padding:5px; max-height: 50%;  " 
+          ng-repeat="chat in message.chats" >
+          <div ng-show="chat.from == message.user.id" class="hisText" >
+              <img ng-src="{{getImage('avatar',message.user.avatar)}}"  />
+              {{chat.msg}}
+              <p>{{chat.time}}</p>
+          </div>
+          <div ng-show="chat.from != message.user.id" class="myText">
+              <span style="color:{{((message.chats[0]).seen)?'red':'#CCC'}}"><i class="ion ion-android-checkmark-circle "></i></span>
+              {{chat.msg}}
+              <p>{{chat.time}}</p>
+          </div>
+          <div style="clear:both"></div>
+          <p ng-show="chat.from != message.user.id"  class="chatTime">{{chat.time }}</p>
+      </div>
+  </ion-content>
+  <ion-content scroll="false" >
+      <label class="item item-input" style="position: absolute; bottom: 0; width:100%" >
+          <input type="text" placeholder="Type a message" style="background-color:bluex;min-width:80%">
+          <span class="input-label" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;Send</span>
+      </label>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,65 @@
+﻿<ion-view  view-title="Select Category" class="wrapper"  >
+  
+  <!--<ion-nav-buttons side="left">
+     
+        <div class="bar bar-header" style="text-align:center;" >
+            <div class="tittle"  style="font-size:18px; text-align:center; padding-top:10px; width:100%;">
+                
+            </div>
+	    </div>
+    </ion-nav-buttons> -->
+
+  <ion-content scroll="false">	
+      <div class="bar bar-header" style="background-color:#BE2633;">
+
+            <label class="item item-input-inset" style="border-radius: 8px; width:90%; margin-right:5px; height:20px;margin-top:5px;"  >
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" class="input-small" ng-model="$parent.searchCategory"  />
+            </label>
+
+            <button class="button button-assertive icon ion-android-cancel" ng-click="clearSearch()" ></button>
+       </div>
+       <div style="height:100px; width:100%; background-color:#ffd800;">
+
+       </div>
+  </ion-content>
+   
+	
+  <ion-content scroll="true" class="has-header" style="background-color:#E8E8E8; padding-top: 50px;"> 
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+    <ion-list class="categoriesList" > 
+        
+        <!--<div >
+
+          <div class="item item-divider" >
+                <i class="ion {{category.icon}}" style="font-size:22px; width:15px;" ></i> &nbsp;
+                {{category.name}}
+          </div>
+          <ion-checkbox  
+              ng-repeat="subcategory in category.sub_categories | filter: { name: searchCategory}"
+              class="checkbox-assertive"
+              style="font-size:18px;"
+              ng-checked="isPresent(subcategory)"
+              ng-click="addCategory(subcategory)" id="check{{subcategory.id}}">
+              <i class="ion {{subcategory.icon}}" ></i> {{subcategory.name}}
+          </ion-checkbox>
+      </div> -->
+
+       <ion-item 
+            ng-repeat="category in categories | filter: { name: searchCategory} track by $index   "
+            ng-class="['item-remove-animate', 'item-icon-left', 'item-icon-right', 'appCategory', category.classy]" 
+            type="item-text-wrap" 
+            href="#/tab/more/addabusiness/categories/list/{{category.id}}" >
+            <i class="icon icon-{{category.icon}} categoryIcon "></i>
+            {{category.name}}  <i class="ion ion-ios-checkmark-empty" ng-show="category.classy != null && category.classy.length > 0"></i>
+            <i class="icon ion-chevron-right appChevron"></i>
+        </ion-item>
+
+    </ion-list>
+
+  </ion-content>
+</ion-view>
+

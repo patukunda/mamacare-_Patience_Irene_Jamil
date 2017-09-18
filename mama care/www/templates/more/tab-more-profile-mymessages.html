@@ -1,0 +1,29 @@
+﻿<ion-view view-title="Messages"  > 
+
+  <ion-content scroll="true" >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="message in mymessages" type="item-text-wrap" href="#/tab/more/profile/mymessages/{{message.id}}">
+        <img ng-src="{{getImage('avatar',message.user.avatar)}}">
+        <h2>{{message.user.first_name + '  ' + message.user.last_name }}</h2>
+        <p>{{ (message.chats[0]).msg }} </p>
+        <span style="float:left; color:{{((message.chats[0]).seen)?'#CCC':'red'}}"><i class="ion ion-android-checkmark-circle "></i></span><span style="float:right; font-size:smaller; color:#ccc">{{ (message.chats[0]).time }}</span>
+      </ion-item>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="message in mymessages" type="item-text-wrap" href="#/tab/more/profile/mymessages/{{message.id}}">
+        <img ng-src="{{getImage('avatar',message.user.avatar)}}">
+        <h2>{{message.user.first_name + '  ' + message.user.last_name }}</h2>
+        <p>{{ (message.chats[0]).msg }} </p>
+        <span style="float:left; color:{{((message.chats[0]).seen)?'#CCC':'red'}}"><i class="ion ion-android-checkmark-circle "></i></span><span style="float:right; font-size:smaller; color:#ccc">{{ (message.chats[0]).time }}</span>
+      </ion-item>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="message in mymessages" type="item-text-wrap" href="#/tab/more/profile/mymessages/{{message.id}}">
+        <img ng-src="{{getImage('avatar',message.user.avatar)}}">
+        <h2>{{message.user.first_name + '  ' + message.user.last_name }}</h2>
+        <p>{{ (message.chats[0]).msg }} </p>
+        <span style="float:left; color:{{((message.chats[0]).seen)?'red':'#CCC'}}"><i class="ion ion-android-checkmark-circle "></i></span><span style="float:right; font-size:smaller; color:#ccc">{{ (message.chats[0]).time }}</span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

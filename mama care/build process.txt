@@ -1,0 +1,19 @@
+
+[ceate a key store]
+"C:\Program Files\Java\jdk1.8.0_121\bin\keytool.exe" -genkey -v -keystore "mamacare.keystore" -alias "mamacare" -keyalg RSA -validity 7300
+
+[exract SHA 1]
+"C:\Program Files\Java\jdk1.8.0_121\bin\keytool.exe" -exportcert -alias mamacare -keystore "D:\bando stop heavens\mama care\mamacare.keystore" -list -v -keysize 20148 -validity 1000000
+
+
+==>[build release apk]
+cordova build --release android
+
+==>[sign the apk]
+"C:\Program Files\Java\jdk1.8.0_121\bin\jarsigner.exe" -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore "D:\bando stop heavens\mama care\mamacare.keystore" "D:\bando stop heavens\mama care\platforms\android\build\outputs\apk\android-release-unsigned.apk" "mamacare"
+
+==?[zipalign the apk]
+"D:\android\android studio\sdk\build-tools\23.0.1\zipalign.exe" -f -v 4 "D:\bando stop heavens\mama care\platforms\android\build\outputs\apk\android-release-unsigned.apk" "D:\bando stop heavens\mama care\platforms\android\build\outputs\apk\mamacare.apk"
+
+
+

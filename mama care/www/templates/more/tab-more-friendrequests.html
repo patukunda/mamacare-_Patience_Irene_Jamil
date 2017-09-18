@@ -1,0 +1,43 @@
+﻿<ion-view view-title="Friend Request"  >
+  <ion-content scroll="true" >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+        <ion-infinite-scroll ng-show="undefined == requests || requests == null" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+        <div style=" width:100%; text-align:center "  ng-show="requests != null && requests.length == 0">
+            <br />
+            <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+        </div>
+        <div ng-show="requests != null && requests.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >No Friend requests</div>
+
+
+
+
+
+    <ion-list>
+        <div ng-repeat="friend in requests" style="border-bottom: 1px solid #c7c0c0;">
+            <ion-item class="item-remove-animate item-avatar item-icon-right"  type="item-text-wrap" 
+                  href="#/userprofile/{{friend.id}}"
+                  style="border-bottom:none !important;">
+                <img ng-src="{{getImage('avatar',friend.avatar)}}">
+                <h2>{{friend.first_name}} {{friend.last_name}}</h2>
+                <p>{{correctTime(friend.time_created)}}</p>
+            </ion-item>
+            <div class="row" style="padding-top:0px;padding-bottom:2px;">
+                <div class="col" style="padding-top:0px;padding-bottom:2px;">
+                    <button type="submit" ng-click="acceptRequest(friend.id)" class="button button-block button-small button-assertive" style="margin-top:1px; margin-bottom:1px;">Accept</button>
+                </div>
+                <div class="col" style="padding-top:0px;padding-bottom:2px;">
+                
+                </div>
+                <div class="col" style="padding-top:0px;padding-bottom:2px;">
+                    <button type="submit" ng-click="blockUser(friend.id)" class="button button-block button-small button-assertive" style="margin-top:1px; margin-bottom:1px;">Decline</button>
+                </div>           
+            </div>
+        </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

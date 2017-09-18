@@ -1,0 +1,30 @@
+<ion-view view-title="Support"  >
+
+   <ion-content style="background-color:#E7E7E7">
+       
+       <div style="padding:0px; padding-top: 10px; background-color:#E7E7E7; width:100%" >
+            <div style="width: 100px; float:left">
+                <img src="img/support.png" style="height:100px; width: 100px; padding:0px; margin:0px; float:left" >
+            </div>            
+            <div style="color:#BCBDBB;  float:left; padding-top:45px;"> 
+                Send us your thoughts and suggestions.
+            </div>
+            <div style="clear:both"></div>
+       </div>
+	   <form  name="addSupportForm" novalidate="" ng-submit="sendSupport(addSupportForm)">
+            <div class="list"> 
+                <div class="item item-divider" style="background-color:#F5F6F1; color:#BF2C38;" >
+                    Subject
+                </div>
+                <input type="text" value="" placeholder="Type your Subject ...." ng-model="supportModel.title" style="width:100%; padding-left:20px; padding-right:2%" />
+                <div class="item item-divider" style="background-color:#F5F6F1; color:#BF2C38;">
+                    How can we Help you
+                </div>
+                <textarea  rows="6" style="width:100%;padding:20px" ng-model="supportModel.details"></textarea>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive" >Submit</button>
+            </div>
+        </form>
+   </ion-content>
+</ion-view>

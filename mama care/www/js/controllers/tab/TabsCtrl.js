@@ -1,0 +1,7 @@
+﻿function TabsCtrl($scope, $state) {
+
+    
+
+
+
+}

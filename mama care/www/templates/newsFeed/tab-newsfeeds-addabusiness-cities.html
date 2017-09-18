@@ -1,0 +1,22 @@
+﻿<ion-view view-title="Select a city from {{country.name}}">
+    
+   <ion-content>
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <div style="color: red; padding: 10px; font-size: 16px;" ng-hide="country != null" >
+            Please select a country first
+       </div>
+       <ion-list ng-show="country != null">
+          <ion-radio 
+              ng-repeat="cityObject in country.cities  track by $index"
+              ng-checked="{{isCity(cityObject)}}"
+              ng-click="selectCity(cityObject)"             
+              id="checkCityRadio{{cityObject.id}}" >
+              <strong>{{cityObject.name}}</strong>
+          </ion-radio>
+        </ion-list>
+        
+   </ion-content>
+</ion-view>

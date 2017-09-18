@@ -1,0 +1,46 @@
+﻿<ion-view view-title="{{business.name}}"  >
+
+    <ion-nav-buttons side="center" style="background-color:white !important;">
+        
+        <div class="bar bar-header" style="margin-left:100px;width: 320px;">
+          <h1 class='title title-center' style="width: 200px;">Add a review to {{business.name}}</h1>
+        </div>
+    </ion-nav-buttons> 
+
+   <ion-content class="has-header" style="background-color:#E7E7E7">
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <div class="item item-body" style="padding:0px;">
+            <img class="full-image" ng-src="{{getImage('banner',business.banner)}}" style="height:200px;padding:0px; margin:0px;" >           
+       </div>
+	   <form  name="addReviewForm" novalidate="" ng-submit="addReview(addReviewForm)">
+            <div class="list">
+                <div class="item item-divider" style="background-color:#F5F6F1;">
+                    Rate : <strong>{{goodBrief[reviewModel.good]}}</strong>
+                </div>
+                <div class="item range range-assertive">
+                    <i class="icon ion-android-star-outline" style="color:#BD2532"></i>
+                    <input type="range" name="volume" min="0" max="5" value="0" ng-model="reviewModel.good">
+                    <i class="icon icon ion-star" style="color:#BD2532"></i>
+                </div>
+                <div class="item item-divider" style="background-color:#F5F6F1;">
+                    Price rate : <strong>{{costBrief[reviewModel.cost]}}</strong>
+                </div>
+                <div class="item range range-assertive">
+                    <i class="icon ion-social-usd-outline" style="color:#32B646" ></i>
+                    <input type="range" name="volume" min="0" max="5" value="0" ng-model="reviewModel.cost">
+                    <i class="icon ion-social-usd" style="color:#32B646"></i>
+                </div>
+                <div class="item item-divider" style="background-color:#F5F6F1;">
+                    Review
+                </div>
+                <textarea  rows="4" style="width:100%;padding:30px" ng-model="reviewModel.comment"></textarea>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive" >Submit Review</button>
+            </div>
+        </form>
+   </ion-content>
+</ion-view>

@@ -1,0 +1,60 @@
+﻿<ion-view view-title="Add Business or Place" ng-init="setUp()">
+   <ion-content>
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <form  name="addBusinessForm" novalidate="" ng-submit="addBusiness(addBusinessForm)">
+            <div class="list">
+                <div style="width:100%; height:270px; background-colorx:yellow;" >
+                    <img 
+                        ng-src="{{getImage('capturebanner',addBusinessModel.banner)}}" 
+                        style="height:100%; width:100%"
+                        ng-click="takePhoto()" />
+                </div>
+                <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+                    Country
+                </div>
+                <a class="item  item-icon-right" href="#/tab/newsfeeds/addabusiness/countries/list">
+                    {{(addBusinessModel.country == null || addBusinessModel.country.name == null)? "select" : addBusinessModel.country.name }}
+                    <i class="icon ion-chevron-right appChevron" style="color:#DCDCDC;"></i>
+                </a>
+                <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+                    Required Information
+                </div>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Name</span>
+                    <input type="text" placeholder="" ng-model="addBusinessModel.name">
+                </label>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Address</span>
+                    <input type="text" placeholder="" ng-model="addBusinessModel.address">
+                </label>
+                <a class="item  item-icon-right" href="#/tab/newsfeeds/addabusiness/cities/list">
+                    <span class="input-label">City</span>
+                    {{(addBusinessModel.city == null || addBusinessModel.city.name == null)? "select" : addBusinessModel.city.name }}
+                    <i class="icon ion-chevron-right appChevron" style="color:#DCDCDC;"></i>
+                </a>
+                <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+                    Optional Details
+                </div>
+                <a class="item  item-icon-right" href="#/tab/newsfeeds/addabusiness/categories/list">
+                    <b>Category</b> <span>&nbsp;<i ng-repeat="cat in addBusinessModel.categories">{{cat.name + ", "}}</i>&nbsp;</span>
+                    <i class="icon ion-chevron-right appChevron" style="color:#DCDCDC;"></i>
+                </a>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Phone</span>
+                    <input type="tel" placeholder="" ng-model="addBusinessModel.phone_1">
+                </label>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <span class="input-label">Website</span>
+                    <input type="text" placeholder="" ng-model="addBusinessModel.website">
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive" >Add Business</button>
+            </div>
+       </form>      
+   </ion-content>
+</ion-view>
+

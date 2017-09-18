@@ -1,0 +1,92 @@
+﻿<ion-view view-title="Follow Up Form" >
+    
+   <ion-content>
+
+       <form name="followUpForm"  >  
+           <div class="errordiv" ng-hide="followupModel.errors == undefined || followupModel.errors == null || followupModel.errors.length == 0 "  >
+               <ul>
+                    <li ng-repeat="error in followupModel.errors" >
+                        <i class="ion ion-record"></i> {{error}}
+                    </li>
+               </ul>             
+           </div>
+           <div class="list">
+              <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Weight</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="weight"
+                    ng-model="followupModel.weight" 
+                 >
+              </label>  
+
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Last Antental Visit</span>
+                <input 
+                    type="date" 
+                    placeholder="" 
+                    name="lastAntentalVisit"
+                    ng-model="followupModel.lastAntentalVisit" 
+                 >
+              </label> 
+               
+              
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Antenental Center</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="antentalCenter"
+                    ng-model="followupModel.antentalCenter" 
+                 >
+             </label> 
+
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Was Vaccinated</span>
+                <input 
+                    type="checkbox" 
+                    name="wasVaccinated"
+                    value="yes"
+                    ng-model="followupModel.wasVaccinated" 
+                 > Yes
+                 <input 
+                    type="checkbox" 
+                    name="wasVaccinated"
+                     value="no"
+                    ng-model="followupModel.wasVaccinated" 
+                 > No
+              </label> 
+
+
+              <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Vaccination</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="vaccination"
+                    ng-model="followupModel.vaccination" 
+                 >
+             </label> 
+
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Date Of Vaccination</span>
+                <input 
+                    type="date" 
+                    placeholder="" 
+                    name="vaccinationDate"
+                    ng-model="followupModel.vaccinationDate" 
+                 >
+             </label>
+             
+            </div>
+            
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive" ng-click="addFollowUp()">Submit</button>
+            </div>
+      </form>
+      <br />
+
+   </ion-content>
+</ion-view>
+

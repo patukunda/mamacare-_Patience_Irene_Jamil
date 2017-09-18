@@ -1,0 +1,126 @@
+﻿<ion-view view-title="Maternal Info Form" >
+    
+   <ion-content>
+
+       <form name="marternalForm"  >  
+           <div class="errordiv" ng-hide="maternalModel.errors == undefined || maternalModel.errors == null || maternalModel.errors.length == 0 "  >
+               <ul>
+                    <li ng-repeat="error in maternalModel.errors" >
+                        <i class="ion ion-record"></i> {{error}}
+                    </li>
+               </ul>             
+           </div>
+
+           <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Status</span>
+                <input 
+                    type="checkbox" 
+                    name="status"
+                    value="open"
+                    ng-model="maternalModel.status" 
+                 > Open
+                 <input 
+                    type="checkbox" 
+                    name="status"
+                     value="closed"
+                    ng-model="maternalModel.status" 
+                 > Closed
+              </label> 
+
+
+           <div class="list">
+              <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Height</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="height"
+                    ng-model="maternalModel.height" 
+                 >
+              </label>  
+
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Estimated Date Of Delivery</span>
+                <input 
+                    type="date" 
+                    placeholder="" 
+                    name="estimatedDateOfDelivery"
+                    ng-model="maternalModel.estimatedDateOfDelivery" 
+                 >
+              </label> 
+               
+              
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Date Of Delivery</span>
+                <input 
+                    type="date" 
+                    placeholder="" 
+                    name="dateOfDelivery"
+                    ng-model="maternalModel.dateOfDelivery" 
+                 >
+              </label> 
+
+
+              <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Baby's Weight</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="weightOfBaby"
+                    ng-model="maternalModel.weightOfBaby" 
+                 >
+             </label> 
+
+             <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Baby's Health Status</span>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    name="babyHealthStatus"
+                    ng-model="maternalModel.babyHealthStatus" 
+                 >
+             </label>
+
+             
+           <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Was Baby Vaccinated</span>
+                <input 
+                    type="checkbox" 
+                    name="status"
+                    value="yes"
+                    ng-model="maternalModel.wasBabyVaccinated" 
+                 > Yes
+                 <input 
+                    type="checkbox" 
+                    name="status"
+                     value="no"
+                    ng-model="maternalModel.wasBabyVaccinated" 
+                 > No
+              </label> 
+
+               <label class="item item-input item-stacked-label" style="border-top:none;">
+                <span class="input-label">Was Delivery Normal</span>
+                <input 
+                    type="checkbox" 
+                    name="status"
+                    value="yes"
+                    ng-model="maternalModel.isNormalDelivery" 
+                 > Yes
+                 <input 
+                    type="checkbox" 
+                    name="status"
+                     value="no"
+                    ng-model="maternalModel.isNormalDelivery" 
+                 > No
+              </label> 
+             
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive" ng-click="updateMaternal()">Submit</button>
+            </div>
+      </form>
+      <br />
+
+   </ion-content>
+</ion-view>
+

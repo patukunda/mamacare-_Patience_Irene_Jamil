@@ -1,0 +1,97 @@
+﻿<ion-view> 
+
+    <ion-nav-title>{{dialogue.user.first_name + " " + dialogue.user.last_name}}</ion-nav-title>
+    <ion-content overflow-scroll="true" padding="true" class="has-header" scroll="true" has-footer="true">
+     
+      
+
+      <style>
+          .myText {
+              background-color:#BD2532; 
+              color:white; 
+              float: right; 
+              max-width:70%;
+              text-align: left;
+              border-radius:15px;
+              padding-top:5px;
+              padding-bottom:5px;
+              padding-right:10px;
+              padding-left:10px;
+              margin-right: 20px;
+          }
+              .myText span {
+                  position: absolute;
+                  right: 10px;
+              }
+          .hisText {
+              background-color:#F0F0F0; 
+              color:black; 
+              float: left; 
+              max-width:70%;
+              text-align: left;
+              border-radius:15px;
+              padding-top:5px;
+              padding-bottom:5px;
+              padding-right:10px;
+              padding-left:10px;
+              margin-left: 50px;
+          }
+              .hisText img {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 100px;
+                  position: absolute;
+                  margin-left: -55px;
+              }
+        .chatTime {
+            text-align: center;
+            width: 100%;
+            color: #B3B3B3;
+            margin-top:10px;
+        }
+      </style>
+      <input type="hidden" value="{{messageToSend}}" />
+
+      <ion-infinite-scroll ng-show="undefined == dialogue || dialogue == null" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+
+      <div 
+          class="" 
+          style="padding:5px; max-height: 50%;  " 
+          ng-repeat="chat in dialogue.chats" >
+
+          <div ng-show="chat.is_from_user == '1'" class="hisText" >
+              <img ng-src="{{getImage('avatar',dialogue.user.avatar)}}"  />
+              <div>{{chat.details}}</div>
+              <div am-time-ago="chat.date_created" style="font-size: 9px; padding-top:2px;">{{getCorrectTime(chat.date_created)}}</div>
+          </div>
+
+          <div ng-show="chat.is_from_user == '0'" class="myText">
+              <!--<img ng-src="{{getImage('logo',dialogue.business.logo)}}"  />-->
+              <span style="color:{{((chat.status == '2')?'red':'#CCC')}}"><i class="ion ion-android-checkmark-circle "></i></span>
+              <div>{{chat.details}}</div>
+              <div am-time-ago="chat.date_created" style="font-size: 9px; padding-top:2px;"></div>
+          </div>
+
+          <div style="clear:both"></div>
+          <!--<p ngx-show="chat.sender_id != thisUser.id"  class="chatTime">{{chat.date_created }}</p>-->
+      </div>
+      <br />
+        
+      <button id="toFocus" href="#" style="visibility:hidden" ></button>
+
+     
+      <div style=" width:100%; text-align:center "  ng-show="dialogue != null && dialogue.chats.length == 0">
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+      </div>
+      <div ng-show="dialogue != null  && dialogue != null && dialogue.chats.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >No messages</div>
+      
+  </ion-content>
+
+ <ion-footer-bar align-title="left" class="bar-assertive" style="padding:0px;">
+      <div class="item item-input" style="bottom: 0; width:100%; padding-top: 0px; padding-bottom: 0px;" >
+          <input type="text" id="messageInput" placeholder="Type a message" ng-model="messageToSend" style="background-color:bluex;min-width:80%">
+          <button ng-click="sendMessage()"  class="input-label button button-assertive" style="text-align:center; padding-left: 0px;" >&nbsp;&nbsp;&nbsp;&nbsp;Send</button>
+      </div>
+  </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,61 @@
+﻿<ion-view view-title="{{woman.name}}" class="wrapper" >
+    <style>
+        .thisHeaderX {
+            min-height:30px;
+            width:100%;
+            position:absolute; 
+            background-color: #F5F6F1;
+            top:0;
+        }
+               
+    </style>
+   <ion-content scroll="false" >         
+       <div class="thisHeaderX">
+           <div class="list">
+                <a class="item item-divider item-icon-right"style="background-color:#F5F6F1; color:#BD2532"  href="#/tab/checkin/follow/add/{{woman.id}}" >
+                    Add Follow Up
+                    <i class="icon icon-chevron-right"></i>
+                </a> 
+           </div>
+       </div>   
+   </ion-content>
+   <ion-content scroll="true"  style="margin-top:50px;">  
+       <div class="card" ng-repeat="follow in woman.followups track by $index">
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 5px; background-color:#cafc9d">
+			    Date
+                <span class="badge " style="right:3px"   >{{renderDate(follow.date)}}</span>
+			</a>
+            <a ng-show="view == follow.id" class="item item-icon-left item-icon-right"  style="padding-left: 5px">
+			    Weight
+                <span class="badge " style="right:3px"   >{{follow.weight}}</span>
+			</a>
+            <a ng-show="view == follow.id" class="item item-icon-left item-icon-right"  style="padding-left: 5px">
+			    Last Antental Visit
+                <span class="badge " style="right:3px"   >{{renderDate(follow.lastAntentalVisit)}}</span>
+			</a>
+            <a ng-show="view == follow.id" class="item item-icon-left item-icon-right"  style="padding-left: 5px">
+			    Antental Center
+                <span class="badge " style="right:3px"   >{{follow.antentalCenter}}</span>
+			</a>
+            <a ng-show="view == follow.id" class="item item-icon-left item-icon-right"  style="padding-left: 5px">
+			    Was Vaccinated
+                <span class="badge " style="right:3px"   >{{follow.wasVaccinated}}</span>
+			</a>
+            <a ng-show="view == follow.id" class="item item-icon-left item-icon-right"  style="padding-left: 5px">
+			    Vaccination
+                <span class="badge " style="right:3px"   >{{follow.vaccination}}</span>
+			</a>
+            <a ng-show="view == follow.id" class="item item-icon-left item-icon-right"  style="padding-left: 5px">
+			    Vaccination Date
+                <span class="badge " style="right:3px"   >{{renderDate(follow.vaccinationDate)}}</span>
+			</a>
+            <div  class="item" >
+                <span ng-show="view != follow.id" ng-click="showCard(follow.id)">Expand</span>
+                <span ng-show="view == follow.id" ng-click="showCard(0)">Collapse</span>
+                <a href="#/tab/checkin/follow/edit/{{follow.id}}" style="position:absolute; right:10px; text-decoration:none;">Edit</a>               
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+
+

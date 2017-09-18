@@ -1,0 +1,33 @@
+﻿<ion-view view-title="Business Messages"  > 
+  <ion-content scroll="true" ng-init="goodStatus.status = 0" >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+      </ion-refresher>-->
+
+      <ion-infinite-scroll ng-show="undefined == businessMessages || businessMessages == null" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+
+       <a class="item item-remove-animate item-thumbnail-left item-icon-right" 
+          ng-repeat="message in businessMessages track by $index" 
+          type="item-text-wrap" 
+          href="#/tab/more/businessmessages/chat/{{message.business.id}}"
+          style="height: 100px !important;">
+            <img ng-src="{{getImage('logo',message.business.logo)}}">
+            <h2>
+                <i class="icon ion-chevron-right appChevron" style="color:#9E9E9E;"></i>
+                <span>{{message.business.name}}</span>
+                <p>{{message.message.details}}</p>
+            </h2> 
+            <span style="float:left; font-size:smaller; color:#ccc">{{correctTime(message.time_created)}}</span>
+            <span class="badge badge-assertive"  ng-show="message.unread > 0">{{message.unread}}</span>
+       </a>
+
+      <div style=" width:100%; text-align:center "  ng-show="loaded == true && businessMessages.length == 0">
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+      </div>
+      <div ng-show="businessMessages != null && businessMessages.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >No messages</div>
+
+
+  </ion-content>
+</ion-view>

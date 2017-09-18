@@ -1,0 +1,217 @@
+<ion-view view-title="{{category.name}}" class="wrapper"  >
+
+    <style>
+        #feedSlider .slider-pager {
+            text-align: left !important;
+            color: white !important;
+            padding-left: 15px;
+        }
+
+        #feedSlider .slider-pager-page {
+            color: white !important;
+        }
+
+        .yammza .item-thumbnail-left, .item-thumbnail-left .item-content {
+            padding-top: 0px !important;
+            padding-left: 106px !important;
+            padding-bottom: 0px !important;
+            /*background-color: red !important;*/
+            min-height: 50px;
+        }
+    </style>
+ 
+
+  <ion-content scroll="false">
+      <div class="bar bar-header" style="background-color:#BE2633;">
+
+            <label class="item item-input-inset" style="border-radius: 8px; width:90%; margin-right:5px; height:20px;margin-top:5px;"  >
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="text" placeholder="Filter results ..." class="input-small" ng-model="$parent.filterResults" ng-keyup="keyPressed($event)"  />
+            </label>
+
+            <button class="button button-assertive icon ion-android-cancel" ng-click="clearFilter()" ></button>
+       </div>
+  </ion-content>
+   
+	
+  <ion-content scroll="true" class="has-header" >
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <p style="padding:5px;padding-left:10px;padding-bottom:0px;margin-bottom:3px;margin-top:50px;" ng-show="slides != null && slides != undefined && slides.length > 0"  >Sponsored</p>
+
+       <ion-slide-box auto-play="true" does-continue="true" slide-interval="4000" ng-show="slides != null && slides != undefined && slides.length > 0"  style="height:150px; color:yellow; margin-bottom:10px; background-color: white" >
+	      <ion-slide ng-repeat="slide in slides" >
+	        <div class="box blue" style="height:150px; width:100%; background-color:white; padding-left:10px;" >
+	    	    <img ng-src="{{getImage('slide',slide.slide_image)}}" style="width:390px; height:150px; border-radius:10px;"   />
+	    	    <h3 style="position:relative;background-color: rgba(0,0,0,0.2); margin-top:-60px;color:white; width: 390px; padding: 5px; " >{{slide.business.name}}</h3>
+	    	    <p style="position:relative;background-color: rgba(0,0,0,0.2); margin-top:-15px;color:white; width: 390px;padding-left: 5px;  ">{{slide.business.address}}</p>
+	        </div>
+	      </ion-slide>
+	    </ion-slide-box>
+
+       <div style="height:50px; width:100px;" ng-show="slides == null || slides == undefined || slides.length == 0"></div>
+
+       <div style="width:100%;height:10px;background-color:#E7E7E7"></div>
+
+       
+       <div style="padding:10px; border-bottom: 5px solid #E7E7E7;" ng-repeat="buzynes in  results.found | filter: { name: filterResults }" >
+           
+           <a href="#/businessprofile/{{buzynes.id}}" style="text-decoration:none; display: block;">
+                <img ng-src="{{getImage('logo',buzynes.logo)}}"
+                    style="width:50px;height:50px; border-radiusx:5px; float: left; padding:0px; margin:5px; borderx: 2px solid #808080; border-radius:10px;"  />
+                <div style="padding-top:2px;">
+                    <h4 >{{buzynes.name}}</h4>
+                    <p class="text-muted" style="margin-top:-10px; color:#cac5c5;">{{buzynes.address}}</p>
+                </div>
+                <div style="clear:both" ></div>
+            </a>
+            <div style="width:100%;height:2px;" ></div>
+           <div style="width:100%;height:8px;border-bottom: 1px solid #E9E4EB; margin-bottom: 10px;" >
+
+           </div>
+           <p
+               style="padding:10px;padding-top:1px; padding-bottom:2px; margin:0; background-color:pinkx;"
+               ng-repeat="subCategory in buzynes.sub_categories">
+               <i class="ion ion-ios-browsers-outline" style="font-size:20px; color: #4F4F4F"></i>
+               &nbsp;&nbsp; <strong>Category : </strong>&nbsp;
+               <span style="color:#9F9F9F">
+                   {{ subCategory.category.name + " > " +  subCategory.name }}
+                </span>
+           </p>
+           <p style="padding:10px;padding-top:1px; padding-bottom:2px; margin:0; background-color:pinkx;">
+               <i class="ion ion-ios-star" style="font-size:20px; color: #4F4F4F"></i>
+               &nbsp;&nbsp;<strong>Rate : {{getRate(buzynes.good, false)}}</strong>&nbsp;
+               <span style="color:#BE2633">
+                   <i class="ion ion-ios-star " ng-repeat="i in rate.fill track by $index" >&nbsp;</i>
+                   <i class="ion ion-ios-star-outline " ng-repeat="i in rate.stroke track by $index" >&nbsp;</i>
+                   {{rate.brief}}
+               </span>
+           </p>
+           <p style="padding:10px;padding-top:1px; padding-bottom:2px; margin:0; background-color:pinkx;">
+               <i class="ion ion-social-usd" style="font-size:20px; color: #4F4F4F"></i>
+               &nbsp;&nbsp; <strong>Price : {{getRate(buzynes.cost, true)}}</strong>&nbsp;
+               <span style="color:#32B646">
+                   <i class="ion ion-social-usd " style="margin-right:4px" ng-repeat="i in rate.fill track by $index" >&nbsp;</i>
+                   <i class="ion ion-social-usd-outline "  style="margin-right:4px"  ng-repeat="i in rate.stroke track by $index" >&nbsp;</i> {{rate.brief}}
+               </span>
+           </p>
+           <div style="padding:10px;padding-top:1px; padding-bottom:2px; margin:0; background-color:pinkx;">
+               <i class="icon icon-reviews " style="font-size:25px; color: #4F4F4F; float: left"></i>
+               <div style=" width: 50%; background-colorx: red; float: left; padding-top: 5px;" >
+                    <strong>Reviews : </strong>&nbsp; <span style="color:#9F9F9F">{{buzynes.reviews}} reviews</span>
+               </div>
+           </div>
+
+
+            <div class="row" >
+               <!--<div class="col" ng-repeat="thumb in buzynes.photoes | limitTo:4">
+                   <img class="full-image" ng-src="{{getImage('thumb',thumb.photo)}}" style="height:80px;padding:0px; margin:0px; border: 2px solid #808080; border-radius:10px;" >
+               </div>-->
+
+               <div class="col">
+                   <img 
+                       class="full-image image-square" 
+                       ng-src="{{(buzynes.photoes.length > 0)?getImage('thumb',buzynes.photoes[0].photo):getImage('thumb',null)}}" 
+                       style="padding:0px; margin:0px; border: 0px solid #808080; border-radius:10px;" >
+               </div>
+               <div class="col" >
+                   <img 
+                       class="full-image image-square" 
+                       ng-src="{{(buzynes.photoes.length > 1)?getImage('thumb',buzynes.photoes[1].photo):getImage('thumb',null)}}" 
+                       style="padding:0px; margin:0px; border: 0px solid #808080; border-radius:10px;" >
+               </div>
+               <div class="col" >
+                   <img 
+                       class="full-image image-square" 
+                       ng-src="{{(buzynes.photoes.length > 2)?getImage('thumb',buzynes.photoes[2].photo):getImage('thumb',null)}}" 
+                       style="padding:0px; margin:0px; border: 0px solid #808080; border-radius:10px;" >
+               </div>
+               <div class="col"  >
+                   <img 
+                       class="full-image image-square" 
+                       ng-src="{{(buzynes.photoes.length > 3)?getImage('thumb',buzynes.photoes[3].photo):getImage('thumb',null)}}" 
+                       style="padding:0px; margin:0px; border: 0px solid #808080; border-radius:10px;" >
+               </div>
+           </div>
+
+           
+
+           <div class="row" >
+
+               
+                <button 
+                    class="button button-stable button-small " 
+                    style="
+                        height: 20px; 
+                        font-size:20px; 
+                        padding:2px; 
+                        padding-left:10px; 
+                        padding-right:10px; 
+                        color:#E9E4EB; 
+                        background-color:#E6E6E6; 
+                        border-radius:10px; 
+                        margin-right:10px; "
+
+                     ng-click="call(buzynes.phone_1)"
+                    >
+                    <i class="icon icon-phone403" style="color:#31B645;"  > </i>
+                </button>
+               
+                <button 
+                    class="button button-stable button-small " 
+                    style="
+                        height: 20px; 
+                        font-size:20px; 
+                        padding:2px; 
+                        padding-left:10px; 
+                        padding-right:10px; 
+                        color:#5A5A5A; 
+                        background-color:#E6E6E6; 
+                        border-radius:10px; 
+                        margin-right:10px; ">
+                    <i class="ion ion-ios-camera "  ></i><span style="font-size:15px; margin-left:10px; float: right;">{{buzynes.photoes.length}}</span>
+                </button>
+              
+                <div 
+                    class="" 
+                    style="
+                        height: 30px;
+                        font-size: 24px;
+                        padding:2px; 
+                        padding:2px; 
+                        padding-left:10px; 
+                        padding-right:10px; 
+                        color:#5A5A5A; 
+                        background-color:#E6E6E6; 
+                        border-radius:10px; 
+                        margin-right:10px; ">
+                    <div style="display:inline-block; margin-top: 2px; float: left; margin-right:8px;">
+                        <i class="icon icon-reviews"  ></i>
+                    </div> 
+                    <div style="display:inline-block; 
+                            font-size: 18px;
+                            float: right;
+                            margin-top: 2px;">
+                        {{buzynes.reviews}}
+                    </div>
+                    
+                </div>
+              
+            </div>
+        </div>
+  
+
+       <ion-infinite-scroll  on-infinite="loadMore()" distance="1%" ng-show="loaded == null" ></ion-infinite-scroll>
+
+       <div style=" width:100%; text-align:center "  ng-show="loaded != null && results.found != null && results.found.length == 0">
+            <br />
+            <img src="img/sademoji.png" style="height:200px; width:200px;" />
+        </div>
+        <div ng-show="loaded != null && results.found != null && results.found.length == 0" style="width:100%; text-align:center;  color:#979797; padding:10px; padding-top:20px; font-size:16px; " >
+            No Results Found
+        </div>
+        
+  </ion-content>
+</ion-view>

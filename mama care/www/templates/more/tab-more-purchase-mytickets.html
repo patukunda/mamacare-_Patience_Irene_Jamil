@@ -1,0 +1,45 @@
+<ion-view view-title="My Tickets">
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+    <ion-infinite-scroll ng-show="loaded == false" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+    <div style=" width:100%; text-align:center "  ng-show="loaded == true && paidMovies.length == 0">
+        <br />
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+    </div>
+    <div ng-show="loaded == true && paidMovies.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >You have no tickets</div>
+
+
+
+
+    <div class="list" >
+        <a
+            ng-repeat="receipt in paidMovies"
+            class="item item-thumbnail-left"
+            href="#/tab/more/purchase/mytickets/receipt/{{receipt.id}}"
+            style="
+              border-top: none;
+              margin-bottom: 5px;
+              padding-bottom: 1px;
+              overflow: visible;
+              height: 140px;
+              padding-left: 120px;
+            ">
+            <img
+                ng-src="{{getImage('qrcode',receipt.logo)}}"
+                style="max-height:120px; max-width:120px; width:120px; height:120px;"
+                />
+            <div style="padding-left: 10px; margin-top:10px;">
+              <h3 style="margin-top:5px; color:#919392; padding-top:10px;"><strong>{{receipt.tittle}}</strong></h3>
+            </div>
+            <p style="padding-top: 2px; padding-left:10px; color: #9B9B9B;">{{receipt.name}} - {{receipt.address}}</p>
+            <p style="padding-top: 2px; padding-left:10px; color: #9B9B9B;">{{formatMovieDate(receipt.date_time.split(" ")[0])}}</p>
+            <p style="padding-top: 27px;padding-left: 15px;color: #9B9B9B;font-size: 11px;text-align: right;">Booked on: {{receipt.booked_on.split(" ")[0]}}</p>            
+        </a>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+﻿<ion-view view-title="Chats"  > 
+  <ion-content scroll="true"  >
+      
+      
+      <ion-infinite-scroll ng-show="undefined == messengers || messengers == null" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+       <ion-item 
+          class="item-remove-animate item-avatar item-icon-right" 
+          ng-repeat="messenger in messengers track by $index" 
+          type="item-text-wrap" 
+          href="#/tab/more/businessmessages/chat/chatter/{{messenger.message.business_id}}/{{messenger.id}}">
+        <img ng-src="{{getImage('avatar',messenger.avatar )}}">
+        <h2>
+            <i class="icon ion-chevron-right appChevron" style="color:#9E9E9E;"></i>
+            <span>{{messenger.first_name + " " + messenger.last_name}}</span>
+            <p>{{messenger.message.details}}</p>
+        </h2> 
+        <span style="float:left; font-size:smaller; color:#ccc">{{correctTime(messenger.message.date_created)}}</span>
+        <span class="badge badge-assertive" style="font-size:10px;" ng-show="messenger.unread > 0">{{messenger.unread}} new</span>
+      </ion-item>
+
+      <div style=" width:100%; text-align:center "  ng-show="messengers == true && messengers.length == 0">
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+      </div>
+      <div ng-show="messengers != null && messengers.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >No messages</div>
+
+
+  </ion-content>
+</ion-view>

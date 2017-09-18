@@ -1,0 +1,92 @@
+﻿<ion-view view-title="Claim Your Business" class="wrapper" >
+    <style>
+        .thisHeader {
+            min-height:140px;
+            width:100%;
+            text-align:center; 
+            position:absolute; 
+            background-color: #F5F6F1;
+            top:0;
+        }
+            .thisHeader div {
+                width: 100%;
+                padding-top: 10px;
+            }
+                .thisHeader .div1  .div2 i {
+                    color: #BD2532;
+                    font-size: 50px;
+                    margin-left: 50px;
+                    float: left;
+                    background-color: pinkx;
+                }
+
+                .thisHeader .div1 .div3 {
+                    color: #9B9B9B;
+                    text-decoration: none;
+                    text-align: left;
+                    padding-left: 10px;
+                    float: left;
+                    width: 60%;
+                    background-color: redx;
+                    padding-bottom: 10px;
+                }
+    </style>
+   <ion-content scroll="false" >
+         
+       <div class="thisHeader">
+           <div class="div1">
+               <div class="div2">
+                   <i class="icon icon-claim-icon-in-black"></i>
+               </div>
+               <div class="div3">
+                   Let people know whats great about your Business
+               </div>
+           </div>
+           <div class="list">
+              <div class="item item-input-inset" >
+                <label class="item-input-wrapper">
+                  <input type="search" placeholder="Search for your business" ng-model="$parent.searchStr" ng-keyup="keyPressed($event)" />
+                </label>
+                <button ng-click="search()" class="button button-small" style="background-color:#BD2532; color: white; margin-left: -1px;" >
+                  Search
+                </button>
+              </div>
+           </div>
+       </div>   
+   </ion-content>
+   <ion-content scroll="true"  style="margin-top:140px;">     
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->     
+        <div class="list" ng-show="businessToClaim.claimed.length > 0  || businessToClaim.open.length > 0">
+            <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532" ng-show="businessToClaim.claimed.length > 0" >
+                 Claimed businesses
+            </div>
+            <a class="item item-thumbnail-left" ng-repeat="business in businessToClaim.claimed track by $index" href="#">
+              <img ng-src="{{getImage('logo',business.logo)}}">
+              <h2 style="color:black"><strong>{{business.name}}</strong></h2>
+              <p>{{ business.city.name + ', ' +  business.city.country.name }}</p>
+              <p>{{ business.phone }}</p>
+              <p style="color:#BD2532;">{{ business.claim_status }}</p>
+            </a>
+            <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532" ng-show="businessToClaim.open.length > 0" >
+                 Unclaimed businesses
+            </div>
+            <a class="item item-thumbnail-left" ng-repeat="business in businessToClaim.open track by $index" href="#/tab/more/claimyourbusiness/{{business.id}}">
+              <img ng-src="{{getImage('logo',business.logo)}}">
+              <h2 style="color:black"><strong>{{business.name}}</strong></h2>
+              <p>{{ business.city.name + ', ' +  business.city.country.name}}</p>
+              <p>{{ business.phone }}</p>
+              <p style="color:#BD2532;">{{ business.claim_status }}</p>
+            </a>
+        </div>
+
+        <div ng-show="businessToClaim.claimed.length == 0  && businessToClaim.open.length == 0" style="color: #9B9B9B; text-align:center">
+            <br />No search results <br /><br />
+            <a class="button button-assertive  icon icon-shop3 biggerIcon"  href="#/tab/newsfeeds/addabusiness/0"  > Add this Business</a>
+        </div>
+    </ion-content>
+</ion-view>
+
+

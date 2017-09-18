@@ -1,0 +1,90 @@
+<ion-view view-title="Yammzit">
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+    <ion-list >
+    	<a class="item item-avatar item-icon-right" href="#/myprofile/{{user.id}}">
+	      <img ng-src="{{getImage('avatar',user.avatar)}}">
+	      <h2 style="padding-top: 8px;">{{user.first_name}} {{user.last_name}}</h2>
+	      <i class="icon ion-ios-arrow-right" style="color:#2AB1D2; font-size: 18px !important;"></i>
+	    </a>
+	    <br>
+	    <div class='card'>
+		    <a class="item item-icon-left" href="#/tab/more/favorites/" style="padding-left: 40px">
+				<i class="icon icon-book86" style="font-size:20px; color:#2AB1D2"></i>
+			    Favorites
+			</a>
+			<!--
+			<a class="item item-icon-left" href="#/tab/more/gossip/">
+				<i class="icon icon-marker20"></i>
+			    Purchase
+			</a> -->
+
+
+      <a class="item item-icon-left" href="#/tab/more/cinema/" style="padding-left: 40px">
+				<i class="icon ion-videocamera" style="font-size:20px; color:#00D34B"></i>
+			    Movies
+			</a>
+      <a class="item item-icon-left" href="#/tab/more/events/" style="padding-left: 40px">
+				<i class="icon icon-carnival48" style="font-size:20px; color:#4269AE"></i>
+			    Events
+			</a>
+			<a class="item item-icon-left" href="#/tab/more/purchase/" style="padding-left: 40px">
+				<i class="icon icon-marker20" style="font-size:20px; color:#F4462E"></i>
+			    Purchase
+			</a>
+
+			<a class="item item-icon-left item-icon-right" href="#/tab/more/businessmessages/" style="padding-left: 40px">
+				<i class="icon icon-download43" style="font-size:20px; color:#4269AC"></i>
+			    Business Messages
+                <span class="badge badge-assertive" ng-show="unreadBusinessMessagesCount > 0">{{unreadBusinessMessagesCount}}</span>
+                <span class="badge badge-assertive" ng-show="unreadBusinessMessagesCount <= 0 || unreadBusinessMessagesCount == NaN"></span>
+			</a>
+            <a class="item item-icon-left item-icon-right" href="#/tab/more/mybusinessmessages/" style="padding-left: 40px">
+				<i class="icon icon-download43" style="font-size:20px; color:#94CD48"></i>
+			    My Page Inbox
+                <span class="badge badge-assertive" ng-show="unreadMyBusinessMessagesCount > 0">{{unreadMyBusinessMessagesCount}}</span>
+                <span class="badge badge-assertive" ng-show="unreadMyBusinessMessagesCount <= 0 || unreadMyBusinessMessagesCount == NaN"></span>
+			</a>
+		</div>
+		<br/>
+		<div class='card'>
+		    <a class="item item-icon-left" href="#/tab/more/findfriends/" style="padding-left: 40px">
+				<i class="icon ion-person-stalker" style="font-size:20px; color:#4269AC"></i>
+			    Find Friends
+			</a>
+            <a class="item item-icon-left" href="#/tab/more/friendrequests/" style="padding-left: 40px">
+				<i class="icon icon-add40" style="font-size:20px;  color:#588CFE"></i>
+			    Friend Requests
+                <span class="badge badge-assertive" ng-show="friendRequestsCount > 0">{{friendRequestsCount}}</span>
+                <span class="badge badge-assertive" ng-show="friendRequestsCount <= 0 || friendRequestsCount == NaN"></span>
+			</a>
+			<a class="item item-icon-left" href="#/tab/more/addabusiness" style="padding-left: 40px">
+				<i class="icon icon-shop3" style="font-size:30px;  color:#FF6096"></i>
+			    Add a Business
+			</a>
+			<a class="item item-icon-left" href="#/tab/more/claimyourbusiness" style="padding-left: 40px">
+				<i class="icon icon-claim-icon-in-black" style="font-size:30px; color:#F26B98"></i>
+			    Claim your Business
+			</a>
+		</div>
+		<br/>
+		<div class='card'>
+		    <a class="item item-icon-left" href="#/tab/more/about/" style="padding-left: 40px">
+				<i class="icon ion-information-circled" style="font-size:20px;"></i>
+			    About
+			</a>
+			<a class="item item-icon-left" href="#/tab/more/support/" style="padding-left: 40px">
+				<i class="icon icon-call37" style="font-size:20px;"></i>
+			    Support
+			</a>
+			<a class="item item-icon-left" href="#" ng-click="signOut()" style="padding-left: 40px">
+				<i class="icon ion-power" style="font-size:20px;"></i>
+			    Sign out
+			</a>
+		</div>
+    </ion-list>
+  </ion-content>
+</ion-view>

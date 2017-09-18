@@ -1,0 +1,123 @@
+<ion-view view-title="Payment Method">
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+    <ion-infinite-scroll ng-show="loaded == false" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+
+    <div class="list"  >
+      <div style="clear:both"></div>
+      <div style="width:100%; text-align:center; background-color:#E6E6E6;">
+        <div style="background-color:#B92631; width: 60px; color: white;text-align:center;display: inline-block;"></div>
+      </div>
+      <div
+          class="item item-thumbnail-left"
+          style="
+            border-top: none;
+            margin-top: 0px;
+            padding-bottom: 1px;
+            overflow: visible;
+            height: 110px;
+            padding-left: 120px;
+            padding-right: 10px;
+            background-color: #E6E6E6;
+          ">
+          <img
+              src="img/mobileMoney.png"
+              style="max-height:70px; max-width:50px; width:50px; height:70px; padding-left:0px; left: 60px; top: 20px;"
+              />
+          <div style="max-width:100%; height:60px; overflow:hidden;margin-top: 35px;">
+            <h2 style="color:#2C2C2C; white-space: normal;"><strong>Mobile Money</strong></h2>
+          </div>
+
+      </div>
+
+      <div ng-show="errors.length > 0" style="padding:10px;">
+        <h4>!OOps. We experienced some issues</h4>
+        <ul style="color:red; font-wieght:bold">
+          <li ng-repeat="err in errors track by $index">{{err}}</li>
+        </ul>
+      </div>
+
+      <div style="width:100%; text-align:center; background-color:white;">
+        <div id="pmbookingtimer" style="background-color:#B92631; width: 60px; color: white;text-align:center;display: inline-block;"></div>
+      </div>
+
+      <form method="post"  action="http://yammzit.com/mobile/saveCinemaPaymentDetailsByPosting.php">
+        <input type="hidden" name="password" value="" ng-model="user.password" />
+        <input type="hidden" name="email" value="" ng-model="user.email" />
+        <input type="hidden" name="movieDateId" value="" ng-model="movieDateId" />
+        <div style="width:100%; text-align:center; margin-top:20px;">
+          <div>
+            <div style="text-align:left; width: 57%;display: inline-block;"><strong>Phone No. e.g 0775995738</strong></div>
+            <input  type="text" ng-blur="validatePhone()"  name="originalphone" value=""  ng-model="payForm.phone_number" placeholder=" Phone No." class="paymentInput" />
+            <input type="hidden" name="payphone" value="{{(payForm.phone_number != 'undefined' && payForm.phone_number != null && payForm.phone_number.length > 0)?payForm.phone_number.replace('0','256'):''}}" />
+          </div>
+        </div>
+
+        <div style="width:100%; text-align:center; margin-top:20px;">
+          <div>
+            <div style="text-align:left; width: 57%;display: inline-block;"><strong>Email</strong></div>
+            <input type="text" value="" name="payemail" ng-model="payForm.email" placeholder=" Email" class="paymentInput" />
+          </div>
+        </div>
+
+        <div style="width:100%; text-align:center; margin-top:10px;">
+          <div style="font-size: 12px;  width: 60%; display: inline-block;">
+            An email containing your Yammz Code will be sent to your email provided below
+          </div>
+        </div>
+
+        <div style="width:100%; text-align:center; margin-top:10px;">
+          <div style="font-size: 12px;  width: 60%; display: inline-block;">
+            <strong>
+              By Paying, you agree to your
+              <a
+                style="color:#C0303C"
+                ng-click="openBrowser('http://yammzit.com/about/cinema/terms_of_service.php?s=1')" >
+                Terms
+              </a>
+              and
+              <a
+                style="color:#C0303C"
+                ng-click="openBrowser('http://yammzit.com/about/cinema/terms_of_service.php?s=1')" >
+                Conditions
+              </a> of payment.
+            </strong>
+          </div>
+        </div>
+
+        <div style="width:100%; text-align:center; margin-top:30px;">
+
+
+          <button
+             ng-click="crazyForm()"
+             type="button"
+             data-ugclicking="payForMovieXXX"
+             ng-show="showBtn"
+             style="
+              min-height: 60px;
+              max-width: 80px;
+              background-color: #BD2532;
+              color: white;
+              display: inline-block;
+              height: 80px;
+              width: 80px;
+              border-radius: 50%;
+              text-align: center;
+              text-decoration: none;
+              font-size: 18px;
+              border: none;
+            ">
+             PAY
+          </button>
+
+        </div>
+      </form>
+
+    </div>
+  </ion-content>
+</ion-view>

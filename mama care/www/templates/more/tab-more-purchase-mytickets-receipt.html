@@ -1,0 +1,175 @@
+<ion-view view-title="Ticket Details">
+
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+    <ion-infinite-scroll ng-show="loaded == false" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+    <div style=" width:100%; text-align:center "  ng-show="loaded == true && mybooking == null">
+        <br />
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+    </div>
+    <div ng-show="loaded == true && mybooking == null" style="width:100%; text-align:center;  color:#AEAEAE;" >OOps, there is no mybooking</div>
+
+    <div class="list" ng-hide="loaded == true && mybooking == null" >
+      <div style="clear:both"></div>
+      <div style="text-align:center; background-color:#E6E6E6; ">
+        <div style="padding-top:5px; padding-bottom:5px; "><strong>{{mybooking.movie_tittle}}</strong></div>
+        <img
+            src="{{getImage('qrcode',mybooking.logo)}}"
+            style="width:90%;"/>
+        <div style="max-width:100%; height:60px; overflow:hidden;margin-top: 5px;">
+          Scan your Yammz ticket <br/> <br/>
+          Your purchase is confirmed
+        </div>
+      </div>
+      <div style="text-align:center;padding-top:4px; padding-bottom:5px; font-size:16px;">
+        <strong>Confirmation ID: {{mybooking.confirmation_id}}</strong>
+      </div>
+      <div
+          class="item"
+          style="
+            border-top: none;
+            margin-top: 0px;
+            padding-top: 5px;
+            padding-bottom: 1px;
+            overflow: visible;
+            padding-left: 10px;
+            padding-right: 10px;
+            background-color: #E6E6E6;
+          ">
+          <div style="max-width:100%; height:25px; overflow:hidden">
+            <div style="color:#2C2C2C; white-space: normal;float:left; width:40%;">
+              <strong>CINEMA NAME</strong>
+            </div>
+            <div style="color:#2C2C2C; white-space: normal;float:right; width:60%; text-align:left;">
+              {{mybooking.business_name}}
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div style="max-width:100%; height:25px; overflow:hidden">
+            <div style="color:#2C2C2C; white-space: normal;float:left; width:40%;">
+              <strong>HALL NAME</strong>
+            </div>
+            <div style="color:#2C2C2C; white-space: normal;float:right; width:60%; text-align:left;">
+              {{mybooking.hall_name}}
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div style="max-width:100%; height:25px; overflow:hidden">
+            <div style="color:#2C2C2C; white-space: normal;float:left; width:40%;">
+              <strong>MOVIE TITLE</strong>
+            </div>
+            <div style="color:#2C2C2C;
+              	        float:right;
+                        font-size:13px;
+                        width:60%;
+                        text-align:left; overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap; ">
+              {{mybooking.movie_tittle}}
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div style="max-width:100%; height:25px; overflow:hidden">
+            <div style="color:#2C2C2C; white-space: normal;float:left; width:40%;">
+              <strong>RATING</strong>
+            </div>
+            <div style="color:#2C2C2C; white-space: normal;float:right; width:60%; text-align:left;">
+              {{mybooking.rating}}
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div style="max-width:100%; height:25px; overflow:hidden">
+            <div style="color:#2C2C2C; white-space: normal;float:left; width:40%;">
+              <strong>SHOW DATE</strong>
+            </div>
+            <div style="color:#2C2C2C; white-space: normal;float:right; width:60%; text-align:left;">
+              {{mybooking.show_date_and_time.split(" ")[0]}}
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div style="max-width:100%; height:25px; overflow:hidden">
+            <div style="color:#2C2C2C; white-space: normal;float:left; width:40%;">
+              <strong>SHOW TIME</strong>
+            </div>
+            <div style="color:#2C2C2C; white-space: normal;float:right; width:60%; text-align:left;">
+              {{mybooking.show_date_and_time.split(" ")[1].substr(0,5)  + " " + mybooking.show_date_and_time.split(" ")[2]}}
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <div style="max-width:100%; ">
+            <div style="color:#2C2C2C; white-space: normal;float:left; width:40%;">
+              <strong>SEATS SELECTED</strong>
+            </div>
+            <div style="color:#2C2C2C; float:right; width:60%; height:auto; text-align:left; white-space: normal;">
+              <span style="margin-left:4px;" ng-repeat="seat in mybooking.seats_selected">{{seat+" "}} </span>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+      </div>
+      <div class="row" style="border-bottom: 2px solid #CCC;">
+          <div class="col"></div>
+          <div class="col">SEAT(S)</div>
+          <div class="col" data-here="PRICE"></div>
+      </div>
+      <div class="row" style="border-bottom: 2px solid #CCC; padding-top:5px;">
+          <div class="col"><strong>Adult:</strong></div>
+          <div class="col">{{mybooking.seats_selected.length}}</div>
+          <div class="col" data-here="UGX ..mybooking.booking_fees_total.."></div>
+      </div>
+      <div class="row" style="border-bottom: 2px solid #CCC; padding-top:10px;">
+          <div class="col-33" style="padding-left:5px;"><strong>Extras:</strong></div>
+          <div class="col-66" style="padding-left:5px;" >
+             <div
+                style="display:inline-block; margin-right:10px;"
+                ng-repeat="xtra in mybooking.extras">{{xtra.quantity}} {{xtra.name}} </div>
+          </div>
+      </div>
+      <div class="row" style="border-bottom: 2px solid #CCC; padding-top:10px;display:none">
+          <div class="col" ><strong>mybooking FEE:</strong></div>
+          <div class="col">
+            UGX {{mybooking.booking_charges}}
+          </div>
+          <div class="col">PER TICKET</div>
+      </div>
+      <div class="row" style="border-bottom: 2px solid #CCC; padding-top:10px;">
+          <div class="col" ><strong>TOTAL PRICE:</strong></div>
+          <div class="col" style="font-weight:bold">
+            UGX {{mybooking.total_price}}
+          </div>
+          <div class="col"></div>
+      </div>
+
+      <div style="width:100%; text-align:center; margin-top:30px; margin-top:20px;">
+        <div ng-click="deleteTicket();" style="background-colorx:red;    background-colorx: red;width: 200px;display: inline-block;">
+            <button
+               style="
+                min-height: 40px;
+                max-width: 40px;
+                background-color: #BD2532;
+                color: white;
+                display: inline-block;
+                height: 40px;
+                width: 84px;
+                border-radius: 50%;
+                text-align: center;
+                text-decoration: none;
+                font-size: 18px;
+                border: none;
+                display: inline-block;
+              "
+               >
+               <i class="icon icon-download43"></i>
+            </button>
+            <div style="display: inline-block;font-size: 16px;color: #515151;"><strong>Delete Ticket<strong></div>
+        </div>
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>

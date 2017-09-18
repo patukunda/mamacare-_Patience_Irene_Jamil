@@ -1,0 +1,85 @@
+﻿<ion-view view-title="{{thisUser.name}}"  > 
+  <ion-content scroll="true" has-footer="true"  >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+      <style>
+          .myText {
+              background-color:#BD2532; 
+              color:white; 
+              float: right; 
+              max-width:70%;
+              text-align: left;
+              border-radius:15px;
+              padding-top:5px;
+              padding-bottom:5px;
+              padding-right:10px;
+              padding-left:10px;
+              margin-right: 20px;
+          }
+              .myText span {
+                  position: absolute;
+                  right: 10px;
+              }
+          .hisText {
+              background-color:#F0F0F0; 
+              color:black; 
+              float: left; 
+              max-width:70%;
+              text-align: left;
+              border-radius:15px;
+              padding-top:5px;
+              padding-bottom:5px;
+              padding-right:10px;
+              padding-left:10px;
+              margin-left: 50px;
+          }
+              .hisText img {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 100px;
+                  position: absolute;
+                  margin-left: -55px;
+              }
+        .chatTime {
+            text-align: center;
+            width: 100%;
+            color: #B3B3B3;
+            margin-top:10px;
+        }
+      </style>
+      <div 
+          class="" 
+          style="padding:5px; max-height: 50%;  " 
+          ng-repeat="chat in thisUser.messages" >
+
+          <div ng-show="chat.sender_id === thisUser.id" class="hisText" >
+              <img ng-src="{{getImage('avatar',thisUser.avatar)}}"  />
+              <div>{{chat.details}}</div>
+              <div am-time-ago="chat.date_created" style="font-size: 9px; padding-top:2px;"></div>
+          </div>
+
+          <div ng-show="chat.sender_id != thisUser.id" class="myText">
+              {{}}
+              <span style="color:{{((chat.status == 2)?'red':'#CCC')}}"><i class="ion ion-android-checkmark-circle "></i></span>
+              <div>{{chat.details}}</div>
+              <div am-time-ago="chat.date_created" style="font-size: 9px; padding-top:2px;"></div>
+          </div>
+
+          <div style="clear:both"></div>
+          <!--<p ngx-show="chat.sender_id != thisUser.id"  class="chatTime">{{chat.date_created }}</p>-->
+      </div>
+      <br />
+      <br />
+      <br />
+      <button id="toFocus" href="#" style="visibility:hidden" ></button>
+  </ion-content>
+
+ <ion-footer-bar align-title="left" class="bar-assertive" style="padding:0px;">
+      <div class="item item-input" style="bottom: 0; width:100%; padding-top: 0px; padding-bottom: 0px;" >
+          <input type="text" id="messageInput" placeholder="Type a message" ng-model="messageToSend" style="background-color:bluex;min-width:80%">
+          <button ng-click="sendMessage()"  class="input-label button button-assertive" style="text-align:center; padding-left: 0px;" >&nbsp;&nbsp;&nbsp;&nbsp;Send</button>
+      </div>
+  </ion-footer-bar>
+</ion-view>

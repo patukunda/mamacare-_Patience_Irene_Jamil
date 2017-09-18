@@ -1,0 +1,37 @@
+<ion-view view-title="{{category.name}}"  class="wrapper"  >
+
+    <ion-content scroll="false">	
+      <div class="bar bar-header" style="background-color:#BE2633;">
+
+            <label class="item item-input-inset" style="border-radius: 8px; width:90%; margin-right:5px; height:20px;margin-top:5px;"  >
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="text" placeholder="Filter ..." class="input-small" ng-model="$parent.searchSubCategory"  />
+            </label>
+
+            <button class="button button-assertive icon ion-android-cancel" ng-click="clearSearch()" ></button>
+       </div>
+       <div style="height:100px; width:100%; background-color:#ffd800;">
+
+       </div>
+  </ion-content>
+
+   <ion-content scroll="true" class="has-header" style="background-color:#E8E8E8; padding-top: 50px;"> 
+       
+      <ion-list class="categoriesList" > 
+
+      <ion-item 
+            ng-repeat="category in category.sub_categories | filter: { name: searchSubCategory} track by $index   "
+            ng-class="['item-remove-animate', 'item-icon-right', 'appCategory', category.classy]" 
+            type="item-text-wrap" 
+            href="#/tab/categories/subcategories/{{category.id}}" >
+            {{category.name}}
+            <i class="icon ion-chevron-right appChevron"></i>
+        </ion-item> 
+
+        <ion-infinite-scroll  on-infinite="loadMore()" distance="1%" ng-show="loaded == null" ></ion-infinite-scroll>
+    </ion-list>
+
+    
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,99 @@
+<ion-view view-title="Show Time">
+  <ion-content >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+    <ion-infinite-scroll ng-show="loaded == false" on-infinite="placeHold()" distance="1%"  > </ion-infinite-scroll>
+
+    <div style=" width:100%; text-align:center "  ng-show="loaded == true && movieShowDates.length == 0">
+        <br />
+        <img src="img/sademoji.jpg" style="height:200px; width:200px;" />
+    </div>
+    <div ng-show="loaded == true && movieShowDates.length == 0" style="width:100%; text-align:center;  color:#AEAEAE;" >Sorry there are no available shows</div>
+
+
+
+    <div class="list" ng-hide="movie == null || (loaded == true && movieShowDates.length == 0)" >
+      <div
+          class="item item-thumbnail-left"
+          style="
+            border-top: none;
+            margin-top: 0px;
+            padding-bottom: 1px;
+            overflow: visible;
+            height: 160px;
+            padding-left: 120px;
+            padding-right: 10px;
+            background-color: #E6E6E6;
+          ">
+          <img
+              ng-src="{{getImage('moviecover',movie.cover_photo )}}"
+              style="max-height:140px; max-width:100px; width:100px; height:140px; padding-left:0px; left: 10px; top: 10px;"
+              />
+          <div style="max-width:100%; height:60px; overflow:hidden" data-t="movie.business_name" >
+            <h2 style="color:#2C2C2C; white-space: normal;"><strong>{{movie.tittle}}</strong></h2>
+          </div>
+          <p style="padding-top: 5px;color: #878687;">({{movie.parental_control}}) {{movie.language}}</p>
+          <p style="padding-top: 5px;color: #878687;">Running time: {{movie.movie_length_hour}}hr {{movie.movie_length_min}}hr</p>
+
+      </div>
+      <div style="margin-top: 20px; padding-left: 20px;">
+          <div style="color:#222222; font-size:18px;margin-bottom:25px;">{{movieDateFormated}}</div>
+          <div>
+            <div ng-repeat="movieDate in movieShowDates" ng-click="selectShowTime(movieDate.id);">
+              <div style="margin-top:10px;"  >
+                <div style="
+                    width: 50%;
+                    margin-left: 0px;
+                    float:left;
+                    left: 10px;
+                    font-size: 14px;
+                    padding-top:4px;
+
+                    ">{{movieDate.date_time.split(" ")[1].substr(0,5) + " " + movieDate.date_time.split(" ")[2]}}
+                </div>
+                <div style="
+                    float:right;
+                    right:10px;
+                    height:15px;
+                    width:15px;
+                    background-color:#E6E6E6;
+                    border-radius:50%;
+                    border: 4px solid #E6E6E6;
+                    margin-right: 20px;"
+                    class="movieTimeThing"
+                    id="movieTimeThing{{movieDate.id}}"
+                >
+                </div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div style="width:100%; text-align:center; margin-top:65px;">
+        <a
+           ng-hide="selectedMoviesShowDateId == 0"
+           style="
+            min-height: 60px;
+            max-width: 60px;
+            background-color: #BD2532;
+            color: white;
+            display: inline-block;
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 22px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bolder;
+          "
+           href="#/tab/more/cinema/selectmovie/selectdate/showtime/selectseats/">
+           NEXT
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

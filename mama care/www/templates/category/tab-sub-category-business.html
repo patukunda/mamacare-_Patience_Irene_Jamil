@@ -1,0 +1,114 @@
+﻿<ion-view view-title="" class="wrapper" >
+
+    
+
+    <ion-nav-buttons side="center" style="background-color:white !important;">
+        
+        <div class="bar bar-header" style="margin-left:100px;width: 320px;">
+          <h1 class='title title-center' style="width: 200px;">{{business.name}}</h1>
+          <button class="button button-assertive  ion ion-android-share-alt" style="font-size:25px; margin-top:-10px;" ></button>
+        </div>
+    </ion-nav-buttons> 
+    
+    <ion-content scroll="false">
+
+	    <div class="bar bar-header">
+		    <h2 class="title" style="color:#A1A1A1">
+                {{getRate(business.good, false)}}
+                <i ng-repeat="i in rate.fill track by $index" class="icon ion-star" style="color:#CE202A;"></i> 
+                <i class="icon ion-android-star-outline" ng-repeat="i in rate.stroke track by $index" style="color:#CE202A;"></i>
+                {{rate.brief}}
+                &nbsp;&nbsp;&nbsp;
+                {{getRate(business.cost, true)}}
+                <i ng-repeat="i in rate.fill track by $index" class="icon ion-social-usd" style="color:#31B645;"></i> 
+                <i  ng-repeat="i in rate.stroke track by $index" class="icon ion-social-usd-outline"  style="color:#31B645;"></i>
+                {{rate.brief}}
+		    </h2>
+	    </div>
+    </ion-content>
+
+   <ion-content  scroll="true" class="has-header" style="background-color:#E7E7E7">
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <div class="item item-body" style="padding:0px;">
+            <img class="full-image" src="{{getImage('banner',business.banner)}}" style="height:200px;padding:0px; margin:0px;" >           
+       </div>
+       <div class="row" style="background-color:black;">
+          <div class="col tabs-icon-top" style="background-color:black;width:15%;">
+              <a class="tab-item" style="float:left;color:#CFCBC8;background-color:black">
+                <i class="icon ion-ios-plus"></i>
+                Follow
+              </a>
+          </div>
+          <div class="col tabs-icon-top" style="background-color:black;width:15%;">
+              <a class="tab-item" style="float:left;color:#CFCBC8;background-color:black">
+                <i class="icon ion-ios-email"></i>
+                Message
+              </a>
+          </div>
+          <div class="col tabs-icon-top" style="background-color:black;width:15%;">
+              <a class="tab-item" style="float:left;color:#CFCBC8;background-color:black">
+                <i class="icon ion-star"></i>
+                Rate
+              </a>
+          </div>
+          <div class="col tabs-icon-top" style="background-color:black;width:15%;">
+              <a class="tab-item" style="float:left;color:#CFCBC8;background-color:black">
+                <i class="icon ion-social-usd"></i>
+                Price
+              </a>
+          </div>
+          <div class="col tabs-icon-top" style="background-color:black;width:15%;">
+              <a href="#/tab/categories/addbusinessreview/{{business.id}}" class="tab-item" style="float:left;color:#CFCBC8;background-color:black">
+                <i class="icon icon-reviews"></i>
+                Review
+              </a>
+          </div>
+          <div class="col tabs-icon-top" style="background-color:black;width:15%;">
+              <a class="tab-item" style="float:left;color:#CFCBC8;background-color:black">
+                <i class="icon ion-camera"></i>
+                Add Photo
+              </a>
+          </div>
+        </div>
+       
+	    <a class="item item-icon-left item-icon-right" href="#" style="background-color:#E0E0E0;">
+		    <i class="icon ion-information-circled"></i>
+		    Information
+            <span style="color:#9E9E9E; float: right;">MORE</span><i class="icon ion-chevron-right" style="color:#9E9E9E;"></i>
+	    </a>
+	    <a class="item item-icon-left" href="#" style="background-color:#E0E0E0;border-top:1px solid white;">
+		    <i class="icon ion-android-call" style="color:#31B545"></i>
+		    Call
+	    </a>
+	    <p style="padding:10px; font-size:16px;background-color:white">
+            <strong>Address</strong><br />
+            {{business.address}}
+	    </p>
+
+       <div style="padding:10px; font-size:16px; width:100%; background-color:white" >
+           <div >
+               <strong style="">Photos ({{business.photoes.length}})</strong>
+               <a href="#" style="float:right; color:#9E9E9E; text-decoration:none; margin-right:15px">All Photos</a>
+           </div>
+           <div class="row">
+               <div class="col" ng-repeat="thumb in business.photoes | limitTo:4 " >
+                   <img class="full-image" ng-src="{{getImage('thumb',thumb.photo)}}" style="height:80px;padding:0px; margin:0px; border: 0px solid #808080; border-radius:10px;" > 
+               </div>
+           </div>
+       </div>
+       <br />
+
+       <div  style="padding:10px; font-size:16px; width:100%; background-color:white" >
+            <strong style="">Reviews ({{business.reviews.length}})</strong>
+            <a href="#" style="float:right; color:#9E9E9E; text-decoration:none; margin-right:15px">All Reviews</a>
+        </div>
+
+        <div class="list yammza" style="margin-bottom: 2px; margin-top: 0px;"  >
+  		    <newsFeed ng-repeat="nf in business.reviews"></newsFeed>
+	    </div>
+		
+   </ion-content>
+</ion-view>

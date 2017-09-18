@@ -1,0 +1,20 @@
+﻿<ion-view view-title="Select a country">
+   <ion-content>
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+       <ion-list>
+          <ion-radio 
+              class="yammzitRadio"
+              ng-repeat="countryObject in countries  track by $index"
+              ng-checked="{{isCountry(countryObject)}}"
+              ng-click="selectCountry(countryObject)"             
+              id="checkRadio{{countryObject.id}}" >
+              <!--<img ng-src="{{getImage('flag',countryObject.flag)}}"  class="countyImage" />-->
+              <div class="countyName"><strong>{{countryObject.name}}</strong></div> <br />
+              <!--<div class="countyCode">Code:&nbsp;{{countryObject.code}}</div>-->
+          </ion-radio>
+        </ion-list>
+   </ion-content>
+</ion-view>

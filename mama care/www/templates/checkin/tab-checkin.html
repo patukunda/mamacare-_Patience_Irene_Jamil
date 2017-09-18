@@ -1,0 +1,68 @@
+﻿<ion-view view-title="Women" class="wrapper" >
+    <style>
+        .thisHeader {
+            min-height:30px;
+            width:100%;
+            text-align:center; 
+            position:absolute; 
+            background-color: #F5F6F1;
+            top:0;
+        }
+            .thisHeader div {
+                width: 100%;
+                padding-top: 5px;
+            }
+                .thisHeader .div1  .div2 i {
+                    color: #BD2532;
+                    font-size: 50px;
+                    margin-left: 50px;
+                    float: left;
+                    background-color: pinkx;
+                }
+
+                .thisHeader .div1 .div3 {
+                    color: #9B9B9B;
+                    text-decoration: none;
+                    text-align: left;
+                    padding-left: 10px;
+                    float: left;
+                    width: 60%;
+                    background-color: redx;
+                    padding-bottom: 10px;
+                }
+    </style>
+   <ion-content scroll="false" >         
+       <div class="thisHeader">
+           <div class="list">
+              <div class="item item-input-inset" >
+                <label class="item-input-wrapper">
+                  <input type="search" placeholder="Search for a woman" ng-model="$parent.searchStr" ng-keyup="$parent.keyPressed($event)" />
+                </label>
+                <button class="button button-small" style="background-color:#BD2532; color: white; margin-left: -1px;"
+                    ng-click="$parent.searchWoman()" 
+                    >
+                  Search
+                </button>
+              </div>
+           </div>
+       </div>   
+   </ion-content>
+   <ion-content scroll="true"  style="margin-top:50px;">     
+        
+      
+
+        <div class="list">
+            <div ng-repeat="woman in women" >
+                <a class="item item-thumbnail-left"   href="#/tab/checkin/{{woman.id}}" >
+                  <img ng-src="img/girl-512.png">
+                  <h2 style="color:black"><strong>{{woman.firstName}} {{woman.lastName}}</strong></h2>
+                  <p>{{ woman.address }}</p>
+                  <p>{{ woman.phone }}</p>
+                </a>
+            </div>            
+        </div>
+
+    </ion-content>
+</ion-view>
+
+

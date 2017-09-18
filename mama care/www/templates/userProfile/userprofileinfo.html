@@ -1,0 +1,62 @@
+﻿<ion-view view-title="More Information" >
+   <ion-content>
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+      <div class="list">
+        <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+            Basic Infor
+        </div>
+        <a class="item  item-icon-right" href="#/userprofile/info/friends/">
+            Friends {{thisUser.friends.length}}
+            <i class="icon ion-chevron-right appChevron" ></i>
+        </a>
+        <a class="item  item-icon-right" href="#/userprofile/info/favourites/">
+            Favourites {{thisUser.favorites.length}}
+            <i class="icon ion-chevron-right appChevron" ></i>
+        </a>
+        <a class="item  item-icon-right" hrefx="#">
+            Discovered {{thisUser.added_businesses.length}}
+        </a>
+        <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+            Description
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+            <!--The goal of explicitly defining patterns such as MVC is mostly to streamline communication among developers.
+            Instead of having to tell your coworkers, ―Let‘s make an abstraction of the data access, then let‘s have a separate
+            layer that handles data display, and let‘s put a layer in the middle that regulates this,‖ you can take advantage of
+            a shared vocabulary and say, ―Let‘s use the MVC pattern here-->
+            {{thisUser.about_me}}
+        </div>
+        <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+            Social Media
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+          <span>Facebook &nbsp; : </span><span>{{thisUser.facebook_link}}</span>
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+          <span>Twitter &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : </span><span>{{thisUser.twitter_link}}</span>
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+          <span>Instagram : </span><span>{{thisUser.instagram_link}}</span>
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+          <span>YouTube &nbsp;&nbsp;: </span><span>{{thisUser.youtube_link}}</span>
+        </div>
+        <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532">
+            Contact & Location
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+          <span>Email &nbsp;&nbsp;&nbsp; : </span><span>{{thisUser.email}}</span>
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+          <span>Country : </span><span>{{(thisUser.city != null && thisUser.city.country != null)? thisUser.city.country.name : '' }}</span>
+        </div>
+        <div  style="border-top:none; padding:20px; border-bottom: 1px solid #ddd; ">
+          <span>City &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : </span><span>{{(thisUser.city != null)? thisUser.city.name : '' }}</span>
+        </div>
+    </div>
+   </ion-content>
+</ion-view>
+

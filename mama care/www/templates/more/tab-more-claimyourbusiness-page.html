@@ -1,0 +1,327 @@
+﻿<ion-view view-title="Claim {{mybussiness.name}}">
+
+   <ion-content scroll="true">   
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->  
+       
+       <form  name="claimBusinessForm" novalidate="" ng-submit="claimBusiness(claimBusinessForm)" style="background-color:purplex">
+            <div class="list" style="margin-bottom: 4px;">                
+                <div class="item item-divider"> 
+                  Your current Position at the business 
+                </div>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <input type="text" placeholder="" ng-model="claimModel.position">
+                </label>
+                <div class="item item-divider"> 
+                  Official Business Email
+                </div>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <input type="text" placeholder="" ng-model="claimModel.email">
+                </label>
+                <div class="item item-divider"> 
+                  Business Phone number
+                </div> 
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <input type="text" placeholder="" ng-model="claimModel.phone_1">
+                </label>
+                <div class="item item-divider"> 
+                  Other Work number <small>(optional)</small>
+                </div> 
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <input type="text" placeholder="" ng-model="claimModel.phone_2">
+                </label>    
+                <div class="item item-divider"> 
+                  Business Address
+                </div>               
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <input type="text" placeholder="" ng-model="claimModel.address">
+                </label>                                     
+                <div class="item item-divider"> 
+                  Business Description
+                </div>
+                <label class="item item-input item-stacked-label" style="border-top:none">
+                    <textarea 
+                      ng-model="claimModel.description" 
+                      placeholder="Briefly describe  your business" 
+                      style="background-color:bluex;min-width:80%;  padding-left:5px; padding-right:5px;"
+                      rows="3"></textarea>                
+                </label>  
+                <div class="item item-divider"> 
+                  Select Category <small>(at least one)</small>
+                </div>                   
+                <a class="item  item-icon-right" href="#/tab/more/addabusiness/categories/list">
+                    1. {{(claimModel.category1 == null )? "" : claimModel.category1.name }} 
+                    <i class="icon ion-chevron-right appChevron" ></i>
+                </a>
+                <a class="item  item-icon-right" href="#/tab/more/addabusiness/categories/list">
+                    2. {{(claimModel.category2 == null )? "" : claimModel.category2.name }}
+                    <i class="icon ion-chevron-right appChevron" ></i>
+                </a>
+                <a class="item  item-icon-right" href="#/tab/more/addabusiness/categories/list">
+                    3. {{(claimModel.category3 == null )? "" : claimModel.category3.name }}
+                    <i class="icon ion-chevron-right appChevron" ></i>
+                </a>
+                <div class="item item-divider"> 
+                  Working hours <small>(at least two)</small>
+                </div>
+                <span style="color:#BD2532">Monday</span>
+                <label class="item item-input">
+                    <span class="input-label">Open</span>
+                    <input type="time" ng-model="claimModel.monday_open" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Close</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <span style="color:#BD2532">Tuesday </span>
+                <label class="item item-input">
+                    <span class="input-label">Open</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Close</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <span style="color:#BD2532">Wednesday  </span>
+                <label class="item item-input">
+                    <span class="input-label">Open</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Close</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <span style="color:#BD2532">Thursday  </span>
+                <label class="item item-input">
+                    <span class="input-label">Open</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Close</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <span style="color:#BD2532">Friday  </span>
+                <label class="item item-input">
+                    <span class="input-label">Open</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Close</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <span style="color:#BD2532">Saturday  </span>
+                <label class="item item-input">
+                    <span class="input-label">Open</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Close</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <span style="color:#BD2532">Sunday </span>
+                <label class="item item-input">
+                    <span class="input-label">Open</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Close</span>
+                    <input type="time"  ng-model="claimModel.monday_close" />
+                </label>
+                <div class="item item-divider"> 
+                  Business Cover Photo
+                </div>
+                <div class="item item-body" style="overflow:hidden; background-color:green; padding:0px;height: 248px; padding-bottom:0px;border-bottom:0px;margin-bottom:0px;margin-top:0px;border-width:0px;">
+                       <img class="full-image"
+                             ng-src="{{getImage('capturebanner',claimModel.banner_web)}}"
+                             style="height:248px;padding:0px; margin:0px;margin-top: 0px;"
+                             ng-click="takeBannerPhoto()" >
+                </div>
+                <div class="item item-divider"> 
+                  Business Logo
+                </div>
+                <div style="width:100%; height:150px; padding-top:10px; text-align: center; background-color:yellowx;" >                  
+                    <div 
+                        style="
+                        background-colorx: yellow; 
+                        width:148px; 
+                        height:148px; 
+                        overflow:hidden; 
+                        padding:0px; 
+                        margin:auto;  
+                        border:2px solid #eae7e7; 
+                        border-radius:150px;
+                        background-image: url('{{ (claimModel.logo_web.length == 0)? getImage('capture','uploads/addprofile.png') : getImage('capture',claimModel.logo_web) }}');
+                        background-size:  100% 100%;
+                        padding-top:108px"
+                        ng-click="takeLogoPhoto()" >
+                        <div style="background-color: rgba(98, 5, 5, 0.49); height: 55px; width: 100%; color:white; " >
+                            <i class="icon ion-ios-camera" style="color:white" ></i> Change Photo
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="item item-divider"> 
+                  Social Links <small>(optional)</small>
+                </div>
+                <label class="item item-input item-stacked-label" >
+                    <span class="input-label">Facebook</span>
+                    <input type="text" ng-model="claimModel.facebook_link" />
+                </label>
+                <label class="item item-input item-stacked-label" >
+                    <span class="input-label">Twitter</span>
+                    <input type="text" ng-model="claimModel.twitter_link" />
+                </label>
+                <label class="item item-input item-stacked-label" >
+                    <span class="input-label">Instagram</span>
+                    <input type="text" ng-model="claimModel.instagram_link" />
+                </label>
+                <label class="item item-input item-stacked-label" >
+                    <span class="input-label">Youtube</span>
+                    <input type="text" ng-model="claimModel.youtube_link" />
+                </label>
+                <div class="item item-divider"> 
+                  Other Business Details <small>(optional)</small>
+                </div>   
+                <span class="item item-toggle">
+                     Take Away
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_take_away" />
+                       <div class="track" >
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Accepts Credit Cards
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_accepts_credit_card" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Good for Children
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_good_for_children" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Good for Groups
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_good_for_groups" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item  item-toggle" href="#">
+                    Music
+                    <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_music" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Good for Dancing
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_good_for_dancing" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Alcohol
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_alcohol" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item  item-toggle" href="#">
+                    Happy Hour
+                    <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_happy_hour" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item  item-toggle" href="#">
+                    Best Nights
+                    <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_best_night" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Outdoor Seating
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_outdoor_seating" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Has Wi-Fi
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_has_wi_fi" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Has TV
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_has_tv" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Water Service
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_water_service" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                <span class="item item-toggle">
+                     Has Pool Table
+                     <label class="toggle toggle-assertive">
+                       <input type="checkbox" ng-model="claimModel.other_has_pool_table" />
+                       <div class="track">
+                         <div class="handle"></div>
+                       </div>
+                     </label>
+                </span>
+                
+                <div class="padding">
+                    <button type="submit" class="button button-block button-assertive" >Submit</button>
+                </div>
+                       
+            </div>
+            
+       </form>
+       
+
+    </ion-content>
+</ion-view>
+
+
+

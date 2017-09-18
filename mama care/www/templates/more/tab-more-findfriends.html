@@ -1,0 +1,75 @@
+﻿<ion-view view-title="Find Friends" class="wrapper" >
+    <style>
+        .thisHeader {
+            min-height:60px;
+            width:100%;
+            text-align:center; 
+            position:absolute; 
+            background-color: #F5F6F1;
+            top:0;
+        }
+            .thisHeader div {
+                width: 100%;
+                padding-top: 10px;
+            }
+                .thisHeader .div1  .div2 i {
+                    color: #BD2532;
+                    font-size: 50px;
+                    margin-left: 50px;
+                    float: left;
+                    background-color: pinkx;
+                }
+
+                .thisHeader .div1 .div3 {
+                    color: #9B9B9B;
+                    text-decoration: none;
+                    text-align: left;
+                    padding-left: 10px;
+                    float: left;
+                    width: 60%;
+                    background-color: redx;
+                    padding-bottom: 10px;
+                }
+    </style>
+   <ion-content scroll="false" >
+       <div class="thisHeader">
+           <div class="div1" ng-hide="hidebanner == true" style="background-colorx:red;">
+               <div class="div2">
+                   <i class="icon ion-person-stalker"></i>
+               </div>
+               <div class="div3" style="padding-bottom:0px; width:70%; ">
+                   Find friends around you that share simillar tastes and preferences
+               </div>
+           </div>
+           <div class="list" style="background-colorx:blue;">              
+               <div class="item item-input-inset" style="background-colorx:green; margin-top:0px;"  >
+                    <label class="item-input-wrapper">
+                      <input type="search" placeholder="Search a friends name" ng-model="addBusinessModel.name" />
+                    </label>
+                    <button ng-click="searchFriend()" class="button button-small" style="background-color:#BD2532; color: white; margin-left: -1px;">
+                      Search
+                    </button>
+               </div>
+               <div class="item item-divider" style="background-color:#F5F6F1; color:#BD2532; text-align: left;">
+                    Results
+               </div>
+           </div>
+       </div>   
+   </ion-content>
+   <ion-content scroll="true" id="thisContent" style="margin-top:140px; padding-top: 50px;" on-scroll="hideme()">  
+       <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->      
+        <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="friend in friends" type="item-text-wrap" 
+                  href="#/userprofile/{{friend.id}}">
+                <img ng-src="{{getImage('avatar',friend.avatar)}}">
+                <h2>{{friend.first_name}} {{friend.last_name}}</h2>
+                <p ng-show="friend.city != null && friend.city.id != 0" >{{friend.city.name + " , " + friend.city.country.name}}</p>
+                <p ng-show="friend.city == null || friend.city.id == 0" >{{friend.email}}</p>
+             </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+

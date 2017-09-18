@@ -1,0 +1,67 @@
+﻿<ion-view view-title="{{woman.name}}" class="wrapper" >
+    <ion-content scroll="true"  >   
+       
+
+       <div class="list" style="margin-bottom:0px;">
+            <div class="item item-thumbnail-left"  >
+                <img src="img/girl-512.png">
+                <h2 style="color:black"><strong>{{woman.firstName}} {{woman.lastName}}</strong></h2>
+                <p>Address: {{ woman.address }}</p>
+                <p>Contact: {{ woman.phone }}</p>
+                <p>Status : {{ woman.status }}</p>
+            </div> 
+           <a class="item item-icon-right"  href="#/tab/checkin/follow/{{woman.id}}" >
+                follow ups
+                <span class="badge badge-assertive">{{woman.followups.length}}</span>
+                <i class="icon icon-chevron-right"></i>
+            </a>       
+        </div>
+        <a class="item item-divider item-icon-right" 
+            style="background-color:#F5F6F1; color:#BD2532"
+            href="#/tab/checkin/addMarternalInfo/{{woman.id}}">
+            <i class="icon icon-edit" style="font-size:20px; color:#F4462E"></i>
+            Marternal Information
+        </a>
+        <div class="card">
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 40px">
+			    Height
+                <span class="badge" >{{woman.height}}</span>
+                <span class="badge"></span>
+			</a>
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 40px">
+			    Exp. Delivery Date
+                <span class="badge badge-assertive" >{{renderDate(woman.estimatedDateOfDelivery)}}</span>
+			</a>
+        </div>
+        <a class="item item-divider item-icon-right" 
+            style="background-color:#F5F6F1; color:#BD2532"
+            href="#/tab/checkin/addMarternalInfo/{{woman.id}}">
+            <i class="icon icon-edit" style="font-size:20px; color:#F4462E"></i>
+            Birth Information
+        </a>
+        <div class="card">
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 40px">
+			    Delivery Date
+                <span class="badge badge-assertive" >{{renderDate(woman.dateOfDelivery)}}</span>
+			</a>
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 40px">
+			    Baby's Weight
+                <span class="badge "  >{{woman.weightOfBaby}}</span>
+			</a>
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 40px">
+			    Baby's Healt Status
+                <span class="badge"  >{{woman.babyHealthStatus}}</span>
+			</a>
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 40px">
+			    Baby's Vaccinated ?
+                <span class="badge"  >{{woman.wasBabyVaccinated}}</span>
+			</a>
+            <a class="item item-icon-left item-icon-right"  style="padding-left: 40px">
+			    Was Normal Delivery ?
+                <span class="badge"  >{{woman.isNormalDelivery}}</span>
+			</a>
+        </div>
+
+    </ion-content>
+</ion-view>
+

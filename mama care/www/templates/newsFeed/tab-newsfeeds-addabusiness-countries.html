@@ -1,0 +1,38 @@
+﻿<ion-view view-title="Select a country" class="categoriesPage wrapper" >
+
+    <style>
+        .title-left { text-align: center !important;}
+    </style>
+  <ion-content scroll="false">	
+      <div class="bar bar-header" style="background-color:#BE2633;">
+
+            <label class="item item-input-inset" style="border-radius: 8px; width:90%; margin-right:5px; height:20px;margin-top:5px;"  >
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="text" placeholder="Filter ..." class="input-small" ng-model="$parent.searchCategory"  />
+            </label>
+
+            <button class="button button-assertive icon ion-android-cancel" ng-click="clearSearch()" ></button>
+       </div>
+       <div style="height:100px; width:100%; background-color:#ffd800;">
+
+       </div>
+  </ion-content>
+
+
+   <ion-content scroll="true" class="has-header" style="background-color:#E8E8E8; padding-top: 50px;">
+      <ion-list>
+          <ion-radio 
+              ng-repeat="countryObject in countries  track by $index"
+              ng-checked="{{isCountry(countryObject)}}"
+              ng-click="selectCountry(countryObject)"
+              id="checkRadio{{countryObject.id}}"
+              style="font-family:helvetica; font-weight:lighter; border:none; padding-top:2px;"
+              checkbox-assertive >
+              {{countryObject.name}}
+              <div style="position:absolute; bottom:0px; width:130%; color:#E8E8E8; outline-color:#E8E8E8; background-color:#E8E8E8; border-color:#E8E8E8; height:2px; "></div>
+              <!--<span style="float:right">Code:&nbsp;{{countryObject.code}}</span>-->
+          </ion-radio>
+          <ion-infinite-scroll  on-infinite="loadMore()" distance="1%" ng-show="loaded == null" ></ion-infinite-scroll>
+      </ion-list>
+   </ion-content>
+</ion-view>

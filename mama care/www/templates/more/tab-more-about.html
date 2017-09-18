@@ -1,0 +1,27 @@
+﻿<ion-view view-title="About">
+  <ion-content style="background-color:#E7E7E7">
+       
+       <div style="padding:0px; padding-top: 10px; background-color:#E7E7E7; width:100%" >
+            <div style="width: 100px; float:left; text-align: center; padding-top: 20px;">
+                <i class="icon ion-information-circled" style="color:#BE2633; font-size:70px; height:100px; width: 100px; padding:0px; margin:0px; float:left" ></i>
+            </div>            
+            <div style="color:#BCBDBB;  float:left; padding-top:45px;"> 
+                More information about Yammzit.
+            </div>
+            <div style="clear:both"></div>
+       </div>
+	   <form  name="addSupportForm" novalidate="" ng-submit="sendSupport(addSupportForm)">
+            <div class="list"> 
+                <a class="item item-divider" ng-click="openBrowser('http://yammzit.com/privacy_policy.php')" style="background-color:#F5F6F1; color:#BF2C38;" >
+                    Privacy policy
+                </a>
+                <a class="item item-divider" ng-click="openBrowser('http://yammzit.com/terms_of_service.php')" style="background-color:#F5F6F1; color:#BF2C38;">
+                    Terms of service
+                </a>
+                <a class="item item-divider" ng-click="openBrowser('http://yammzit.com/content_guideline.php')" style="background-color:#F5F6F1; color:#BF2C38;">
+                    Content Guideline
+                </a>
+            </div>
+        </form>
+   </ion-content>
+</ion-view>

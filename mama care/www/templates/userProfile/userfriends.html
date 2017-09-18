@@ -1,0 +1,32 @@
+﻿<ion-view view-title="More Information > Friends List"  >
+  <ion-content scroll="true" >
+      <!--<ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+       </ion-refresher>-->
+
+    <ion-list ng-show="thisUser.friends != null && thisUser.friends.length > 0">
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="friend in thisUser.friends track by $index" type="item-text-wrap" 
+            xhrefx="#/userprofile/{{friend.id}}"
+            ng-href="{{( (friend.id != user.id ) ? ('#/userprofile/' + friend.id ) : ('#/myprofile/0')   ) }}" >
+            <img ng-src="{{getImage('avatar',friend.avatar)}}">
+            <h2>{{friend.first_name + " " + friend.last_name}}</h2>
+            <p>{{friend.email}}</p>
+            <!--<p  am-time-ago="friend.date_created" ></p>-->
+          </ion-item>
+    </ion-list>
+
+    <div style="
+            width:100%; 
+            height: 420px;
+            background-image: url('img/nofriendsgeneral.jpg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-color:pinkx"
+            ng-show="thisUser.friends == null || thisUser.friends.length == 0"
+           >
+
+        </div>
+
+  </ion-content>
+</ion-view>
